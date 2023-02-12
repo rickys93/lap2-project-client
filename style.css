@@ -1,0 +1,118 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navigation-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    background-color: lightcoral;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    z-index: 1;
+    border-bottom: white solid 3px;
+}
+
+.logo {
+    text-decoration: none;
+    color: white;
+    font-size: 40px;
+    font-weight: 800;
+    margin: 0px 15px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.button-colours {
+    border: none;
+    background-color: white;
+    width: 100px;
+    color: coral;
+    padding: 10px;
+    font-size: large;
+    cursor: pointer;
+    margin: 0 5px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.category-sidebar {
+    width: 200px;
+    background-color: lightcoral;
+    color: white;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    height: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.category-list {
+    margin-top: 20px;
+    padding: 0px auto;
+    list-style: none;
+    font-size: 20px;
+}
+
+.category-list li {
+    padding: 10px 0;
+    padding-left: 10px;
+}
+
+.category-list li:hover {
+    background-color: white;
+    color: coral;
+    cursor: pointer;
+}
+
+.main-section-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.main-section {
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 65px;
+    left: 200px;
+    justify-content: center;
+}
+
+.event-container {
+    flex: 1 0 42%;
+    background-color: lightblue;
+    min-width: 300px;
+    max-width: 500px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.event-container:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.picture-container img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.event-details-container {
+    padding: 10px;
+}
