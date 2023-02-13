@@ -5,272 +5,290 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./pop-up.css" />
         <title>Document</title>
     </head>
     <body>
-        <div class="background-image">
-            <nav class="navigation-bar">
-                <div class="nav-left">
-                    <a class="logo" href="./index.html">Florin</a>
-                </div>
-                <div class="nav-right">
-                    <button class="button-colours" id="log-in-button" href="">
-                        Log In
-                    </button>
-                    <button class="button-colours" id="sign-up-button" href="">
-                        Sign Up
+        <div class="full-screen flex-container-center" id="pop-up">
+            <div class="flex-container-center pop-up-center">
+                <div class="flex-container-center pop-up-message">
+                    <h2>Congratulations on leveling up!</h2>
+                    <button
+                        class="button-colours small-button button-border"
+                        id="close-popup-button"
+                    >
+                        Close
                     </button>
                 </div>
-            </nav>
-            <section class="main-section-container">
-                <div class="category-sidebar">
-                    <ul class="category-list">
-                        <li>All</li>
-                        <li>Personal</li>
-                        <li>Work</li>
-                        <li>Party</li>
-                        <li>Workshop</li>
-                        <li>Charity</li>
-                        <li>Big Event</li>
-                        <li>Small Event</li>
-                        <div class="create-new-event-container">
-                            <button
-                                id="create-new-event"
-                                class="button-colours"
-                                type="submit"
-                            >
-                                Create Event &#43;
-                            </button>
-                        </div>
-                    </ul>
+            </div>
+        </div>
+        <nav class="navigation-bar">
+            <div class="nav-left">
+                <a class="logo" href="./index.html">Florin</a>
+            </div>
+            <div class="nav-right">
+                <button class="button-colours" id="log-in-button" href="">
+                    Log In
+                </button>
+                <button class="button-colours" id="sign-up-button" href="">
+                    Sign Up
+                </button>
+            </div>
+        </nav>
+        <div class="category-sidebar">
+            <ul class="category-list">
+                <div class="sidebar-button-container">
+                    <input
+                        type="text"
+                        name="search"
+                        id="search"
+                        placeholder="🔎︎ Search..."
+                    />
                 </div>
-                <div class="main-section">
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
+                <li>All</li>
+                <li>Personal</li>
+                <li>Work</li>
+                <li>Party</li>
+                <li>Workshop</li>
+                <li>Charity</li>
+                <li>Big Event</li>
+                <li>Small Event</li>
+                <div class="sidebar-button-container">
+                    <button
+                        id="create-new-event"
+                        class="button-colours"
+                        type="submit"
+                    >
+                        Create Event &#43;
+                    </button>
+                </div>
+            </ul>
+        </div>
+        <div class="main-section">
+            <div class="event-container">
+                <div class="picture-container">
+                    <img
+                        src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
+                        alt=""
+                    />
+                </div>
+                <div class="event-details-container">
+                    <div>
+                        <span id="event-date">Fri, 7 Jul - 9 Jul</span>
                     </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
+                    <div>
+                        <span id="event-title">Kent Country Show</span>
                     </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
+                    <div>
+                        <span id="event-location">Barcombe Mills</span>
                     </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
+                    <div>
+                        <span id="event-interested">600</span>
+                        interested &#9679;
+                        <span id="event-attending">85</span> attending
                     </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
+                    <div class="button-container">
+                        <button id="interested-button" type="submit">
+                            Interested
+                        </button>
+                        <button id="attending-button" type="submit">
+                            Attending
+                        </button>
                     </div>
                 </div>
-            </section>
+            </div>
+            <div class="event-container">
+                <div class="picture-container">
+                    <img
+                        src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
+                        alt=""
+                    />
+                </div>
+                <div class="event-details-container">
+                    <div>
+                        <span id="event-date">Fri, 7 Jul - 9 Jul</span>
+                    </div>
+                    <div>
+                        <span id="event-title">Kent Country Show</span>
+                    </div>
+                    <div>
+                        <span id="event-location">Barcombe Mills</span>
+                    </div>
+                    <div>
+                        <span id="event-interested">600</span>
+                        interested &#9679;
+                        <span id="event-attending">85</span> attending
+                    </div>
+                    <div class="button-container">
+                        <button id="interested-button" type="submit">
+                            Interested
+                        </button>
+                        <button id="attending-button" type="submit">
+                            Attending
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="event-container">
+                <div class="picture-container">
+                    <img
+                        src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
+                        alt=""
+                    />
+                </div>
+                <div class="event-details-container">
+                    <div>
+                        <span id="event-date">Fri, 7 Jul - 9 Jul</span>
+                    </div>
+                    <div>
+                        <span id="event-title">Kent Country Show</span>
+                    </div>
+                    <div>
+                        <span id="event-location">Barcombe Mills</span>
+                    </div>
+                    <div>
+                        <span id="event-interested">600</span>
+                        interested &#9679;
+                        <span id="event-attending">85</span> attending
+                    </div>
+                    <div class="button-container">
+                        <button id="interested-button" type="submit">
+                            Interested
+                        </button>
+                        <button id="attending-button" type="submit">
+                            Attending
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="event-container">
+                <div class="picture-container">
+                    <img
+                        src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
+                        alt=""
+                    />
+                </div>
+                <div class="event-details-container">
+                    <div>
+                        <span id="event-date">Fri, 7 Jul - 9 Jul</span>
+                    </div>
+                    <div>
+                        <span id="event-title">Kent Country Show</span>
+                    </div>
+                    <div>
+                        <span id="event-location">Barcombe Mills</span>
+                    </div>
+                    <div>
+                        <span id="event-interested">600</span>
+                        interested &#9679;
+                        <span id="event-attending">85</span> attending
+                    </div>
+                    <div class="button-container">
+                        <button id="interested-button" type="submit">
+                            Interested
+                        </button>
+                        <button id="attending-button" type="submit">
+                            Attending
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="event-container">
+                <div class="picture-container">
+                    <img
+                        src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
+                        alt=""
+                    />
+                </div>
+                <div class="event-details-container">
+                    <div>
+                        <span id="event-date">Fri, 7 Jul - 9 Jul</span>
+                    </div>
+                    <div>
+                        <span id="event-title">Kent Country Show</span>
+                    </div>
+                    <div>
+                        <span id="event-location">Barcombe Mills</span>
+                    </div>
+                    <div>
+                        <span id="event-interested">600</span>
+                        interested &#9679;
+                        <span id="event-attending">85</span> attending
+                    </div>
+                    <div class="button-container">
+                        <button id="interested-button" type="submit">
+                            Interested
+                        </button>
+                        <button id="attending-button" type="submit">
+                            Attending
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="event-container">
+                <div class="picture-container">
+                    <img
+                        src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
+                        alt=""
+                    />
+                </div>
+                <div class="event-details-container">
+                    <div>
+                        <span id="event-date">Fri, 7 Jul - 9 Jul</span>
+                    </div>
+                    <div>
+                        <span id="event-title">Kent Country Show</span>
+                    </div>
+                    <div>
+                        <span id="event-location">Barcombe Mills</span>
+                    </div>
+                    <div>
+                        <span id="event-interested">600</span>
+                        interested &#9679;
+                        <span id="event-attending">85</span> attending
+                    </div>
+                    <div class="button-container">
+                        <button id="interested-button" type="submit">
+                            Interested
+                        </button>
+                        <button id="attending-button" type="submit">
+                            Attending
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="event-container">
+                <div class="picture-container">
+                    <img
+                        src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
+                        alt=""
+                    />
+                </div>
+                <div class="event-details-container">
+                    <div>
+                        <span id="event-date">Fri, 7 Jul - 9 Jul</span>
+                    </div>
+                    <div>
+                        <span id="event-title">Kent Country Show</span>
+                    </div>
+                    <div>
+                        <span id="event-location">Barcombe Mills</span>
+                    </div>
+                    <div>
+                        <span id="event-interested">600</span>
+                        interested &#9679;
+                        <span id="event-attending">85</span> attending
+                    </div>
+                    <div class="button-container">
+                        <button id="interested-button" type="submit">
+                            Interested
+                        </button>
+                        <button id="attending-button" type="submit">
+                            Attending
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
