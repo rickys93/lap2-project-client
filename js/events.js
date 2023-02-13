@@ -5,20 +5,9 @@ fetch("http://localhost:3000/events")
         data.forEach((item) => {
             const eventContainer = createEventElement(item);
             allEvents.appendChild(eventContainer);
-
-            // const eventDiv = document.createElement("div");
-            // const eventTitle = document.createElement("h3");
-            // eventTitle.textContent = item.title;
-            // const eventContent = document.createElement("p");
-            // eventContent.textContent = item.description;
-            // const interest = document.createElement("p");
-            // interest.textContent = item.intrest;
-            // eventDiv.appendChild(eventTitle);
-            // eventDiv.appendChild(eventContent);
-            // eventDiv.appendChild(interest);
-            // allEvents.appendChild(eventDiv);
         });
     });
+
 const form = document.getElementById("post-form");
 form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -84,11 +73,17 @@ function createEventElement(data) {
     eventInterestSpan.id = "event-interested";
     eventInterestSpan.textContent = "500";
     eventInterestDiv.appendChild(eventInterestSpan);
+    const interestedText = document.createElement("span");
+    interestedText.textContent = " interested ● ";
+    eventInterestDiv.appendChild(interestedText);
 
     const eventAttendingSpan = document.createElement("span");
     eventAttendingSpan.id = "event-attending";
     eventAttendingSpan.textContent = "50";
     eventInterestDiv.appendChild(eventAttendingSpan);
+    const attendingText = document.createElement("span");
+    attendingText.textContent = " attending";
+    eventInterestDiv.appendChild(attendingText);
 
     const eventButtonDiv = document.createElement("div");
     eventButtonDiv.className = "button-container";
