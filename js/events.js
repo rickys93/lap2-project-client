@@ -106,5 +106,45 @@ function createEventElement(data) {
 
     eventDiv.appendChild(eventContainer);
 
+    eventDiv.addEventListener("click", displayFullEventDetails);
+
     return eventDiv;
+}
+
+async function displayFullEventDetails(e) {
+    const targetElement = findTargetElement(e.target);
+    const eventId = parseInt(targetElement.id);
+
+    const response = await fetch("http://localhost:3000/events/" + eventId);
+
+    if (response.status !== 200) {
+        return;
+    }
+
+    const eventData = await response.json();
+    displayFullEventDetailsInPopup(eventData);
+
+    toggleFullEventPopup();
+}
+
+function displayFullEventDetailsInPopup(eventData) {
+    document.getElementById("event-date").textContent =
+        "7 JUL AT 08:00 - 9 JUL AT 18:00";
+    document.getElementById("event-title").textContent = eventData.title;
+    document.getElementById("event-location").textContent = "Barcombe Mills";
+    document.getElementById("full-event-interested").textContent = "649";
+    document.getElementById("full-event-attending").textContent = "59";
+    document.getElementById("full-event-username").textContent = "RickyS93";
+    document.getElementById("full-event-location").textContent =
+        "Barcombe Mills";
+    document.getElementById("full-event-description").textContent =
+        eventData.description;
+}
+
+function findTargetElement(element) {
+    if (element.className === "event-container") {
+        return element;
+    }
+
+    return findTargetElement(element.parentNode);
 }

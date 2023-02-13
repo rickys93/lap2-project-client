@@ -17,6 +17,10 @@ function closePopup(e) {
     popup.classList.toggle("popup-visible");
 }
 
+function toggleFullEventPopup() {
+    fullEventPopup.classList.toggle("popup-visible");
+}
+
 function toggleSignupPopup(e) {
     registerPopup.classList.toggle("popup-visible");
 }
