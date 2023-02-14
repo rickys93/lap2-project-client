@@ -6,6 +6,10 @@ const eventCreatedPopup = document.getElementById("event-created-popup");
 
 const signupButton = document.getElementById("sign-up-button");
 const loginButton = document.getElementById("log-in-button");
+const logoutButton = document.getElementById("log-out-button");
+const myEventsButton = document.getElementById("my-events-button");
+const usernameDisplay = document.getElementById("display-username-container");
+
 const createNewEventButton = document.getElementById("create-new-event");
 const closeButtons = document.getElementsByClassName("close-pop-up");
 
@@ -53,3 +57,31 @@ for (b of closeButtons) {
 signupButton.addEventListener("click", toggleSignupPopup);
 loginButton.addEventListener("click", toggleLoginPopup);
 createNewEventButton.addEventListener("click", toggleCreateEventPopup);
+
+function displayLoggedIn(username) {
+    logoutButton.classList.toggle("display-none");
+    document.getElementById("display-username").textContent = username;
+    usernameDisplay.classList.toggle("display-none");
+}
+
+function displayLoggedOut() {
+    loginButton.classList.toggle("display-none");
+    signupButton.classList.toggle("display-none");
+    document.getElementById("display-username").textContent = "";
+}
+
+function logOut() {
+    loginButton.classList.toggle("display-none");
+    signupButton.classList.toggle("display-none");
+    logoutButton.classList.toggle("display-none");
+    document.getElementById("display-username").textContent = "";
+    usernameDisplay.classList.toggle("display-none");
+}
+
+function logIn(username) {
+    loginButton.classList.toggle("display-none");
+    signupButton.classList.toggle("display-none");
+    logoutButton.classList.toggle("display-none");
+    document.getElementById("display-username").textContent = username;
+    usernameDisplay.classList.toggle("display-none");
+}

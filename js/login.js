@@ -22,6 +22,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
         localStorage.setItem("token", data.token);
         // close the pop up
         loginPopup.classList.toggle("popup-visible");
+        logIn(form.get("username"));
     } else {
         alert(data.error);
     }

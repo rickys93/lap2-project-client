@@ -14,6 +14,7 @@
         <!-- <script src="./js/login.js" defer></script> -->
         <script src="./js/register.js" defer></script>
         <script src="./js/login.js" defer></script>
+        <script src="./js/logout.js" defer></script>
         <script src="./js/events.js" defer></script>
         <script src="./js/displayFullEvent.js" defer></script>
         <script src="./js/createEvent.js" defer></script>
@@ -185,11 +186,15 @@
                 <a class="logo" href="./index.html">Florin</a>
             </div>
             <div class="nav-right">
-                <button class="button-colours" id="log-in-button" href="">
+                <button class="button-colours display-none" id="log-in-button" href="">
                     Log In
                 </button>
-                <button class="button-colours" id="sign-up-button" href="">
+                <button class="button-colours display-none" id="sign-up-button" href="">
                     Sign Up
+                </button>
+                <div id="display-username-container" class="display-username display-none">Welcome, <span id="display-username"></span>!</div>
+                <button class="button-colours display-none" id="log-out-button" href="">
+                    Log Out
                 </button>
             </div>
         </nav>
@@ -216,8 +221,17 @@
                         id="create-new-event"
                         class="button-colours"
                         type="submit"
-                    >
+                        >
                         Create Event &#43;
+                    </button>
+                </div>
+                <div class="sidebar-button-container">
+                    <button
+                        id="my-events-button"
+                        class="button-colours"
+                        type="submit"
+                        >
+                        My Events
                     </button>
                 </div>
             </ul>

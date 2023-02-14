@@ -142,7 +142,7 @@ body::-webkit-scrollbar {
     justify-content: center;
 }
 
-#create-new-event {
+.sidebar-button-container button {
     width: 220px;
 }
 

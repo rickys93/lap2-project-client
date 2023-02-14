@@ -2,6 +2,7 @@ const allEvents = document.getElementById("events");
 
 async function getAllEvents() {
     clearAllEvents();
+
     const response = await fetch("http://localhost:3000/events");
 
     if (response.status === 200) {
@@ -9,6 +10,25 @@ async function getAllEvents() {
         data.forEach((item) => {
             addEventToPage(item);
         });
+    }
+
+    const options = {
+        headers: {
+            Authorization: localStorage.getItem("token"),
+        },
+    };
+
+    const authResponse = await fetch(
+        "http://localhost:3000/users/authorize",
+        options
+    );
+
+    if (authResponse.status === 200) {
+        const data = await authResponse.json();
+        const username = data.username;
+        displayLoggedIn(username);
+    } else {
+        displayLoggedOut();
     }
 }
 
@@ -129,3 +149,28 @@ function formatDateWithoutTime(start_date, end_date) {
         return `${startDate} ${startMonth} - ${endDate} ${endMonth}`;
     }
 }
+
+async function getUserEvents(e) {
+    const options = {
+        headers: {
+            Authorization: localStorage.getItem("token"),
+        },
+    };
+
+    const response = await fetch("http://localhost:3000/users/events", options);
+
+    if (response.status === 200) {
+        clearAllEvents();
+        myEventsButton.textContent = "All Events";
+        myEventsButton.removeEventListener("click", getUserEvents);
+        myEventsButton.addEventListener("click", getAllEvents);
+
+        const userEvents = await response.json();
+
+        userEvents.forEach((e) => {
+            addEventToPage(e);
+        });
+    }
+}
+
+myEventsButton.addEventListener("click", getUserEvents);
