@@ -35,80 +35,27 @@ form.addEventListener("submit", (event) => {
 });
 
 function createEventElement(data) {
-    const eventDiv = document.createElement("div");
-    eventDiv.className = "event-container";
-    eventDiv.id = data.id;
+    const element = document.getElementsByClassName("event-container")[0];
+    const clone = element.cloneNode(true);
 
-    const pictureContainer = document.createElement("div");
-    pictureContainer.className = "picture-container";
-    const eventImg = document.createElement("img");
-    eventImg.src =
+    const img = clone.getElementsByClassName("event-image");
+    console.log();
+    clone.getElementsByClassName("event-image")[0].src =
         "./images/325738924_5831057380305227_7516818067925943191_n.jpg";
-    pictureContainer.appendChild(eventImg);
-    eventDiv.appendChild(pictureContainer);
+    clone.getElementsByClassName("event-date")[0].textContent =
+        "Fri, 7 Jul - 9 Jul";
+    clone.getElementsByClassName("event-title")[0].textContent = data.title;
+    clone.getElementsByClassName("event-location")[0].textContent =
+        "Barcombe Mills";
+    clone.getElementsByClassName("event-interested")[0].textContent = 555;
+    clone.getElementsByClassName("event-attending")[0].textContent = 34;
 
-    const eventContainer = document.createElement("div");
-    eventContainer.className = "event-details-container";
+    clone.style.display = "block";
+    clone.id = data.id;
 
-    const eventDateDiv = document.createElement("div");
-    const eventDateSpan = document.createElement("span");
-    eventDateSpan.id = "event-date";
-    eventDateSpan.textContent = "Fri, 7 Jul - 9 Jul";
-    eventDateDiv.appendChild(eventDateSpan);
+    clone.addEventListener("click", displayFullEventDetails);
 
-    const eventTitleDiv = document.createElement("div");
-    const eventTitleSpan = document.createElement("span");
-    eventTitleSpan.id = "event-date";
-    eventTitleSpan.textContent = data.title;
-    eventTitleDiv.appendChild(eventTitleSpan);
-
-    const eventLocationDiv = document.createElement("div");
-    const eventLocationSpan = document.createElement("span");
-    eventLocationSpan.id = "event-date";
-    eventLocationSpan.textContent = "Barcombe Mills";
-    eventLocationDiv.appendChild(eventLocationSpan);
-
-    const eventInterestDiv = document.createElement("div");
-    const eventInterestSpan = document.createElement("span");
-    eventInterestSpan.id = "event-interested";
-    eventInterestSpan.textContent = "500";
-    eventInterestDiv.appendChild(eventInterestSpan);
-    const interestedText = document.createElement("span");
-    interestedText.textContent = " interested ● ";
-    eventInterestDiv.appendChild(interestedText);
-
-    const eventAttendingSpan = document.createElement("span");
-    eventAttendingSpan.id = "event-attending";
-    eventAttendingSpan.textContent = "50";
-    eventInterestDiv.appendChild(eventAttendingSpan);
-    const attendingText = document.createElement("span");
-    attendingText.textContent = " attending";
-    eventInterestDiv.appendChild(attendingText);
-
-    const eventButtonDiv = document.createElement("div");
-    eventButtonDiv.className = "button-container";
-
-    const eventInterestedButton = document.createElement("button");
-    eventInterestedButton.id = "interested-button";
-    eventInterestedButton.textContent = "Interested";
-    eventButtonDiv.appendChild(eventInterestedButton);
-
-    const eventAttendingButton = document.createElement("button");
-    eventAttendingButton.id = "attending-button";
-    eventAttendingButton.textContent = "Attending";
-    eventButtonDiv.appendChild(eventAttendingButton);
-
-    eventContainer.appendChild(eventDateDiv);
-    eventContainer.appendChild(eventTitleDiv);
-    eventContainer.appendChild(eventLocationDiv);
-    eventContainer.appendChild(eventInterestDiv);
-    eventContainer.appendChild(eventButtonDiv);
-
-    eventDiv.appendChild(eventContainer);
-
-    eventDiv.addEventListener("click", displayFullEventDetails);
-
-    return eventDiv;
+    return clone;
 }
 
 async function displayFullEventDetails(e) {

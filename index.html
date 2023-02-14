@@ -20,53 +20,40 @@
     <body>
         <!-- log in pop up window - set to hidden by default -->
         <div class="full-screen flex-container-center pop-up" id="login-popup">
-            <div class="pop-up-center event-pop-up">
-                <button id="login-close-button" class="close-popup">
-                    CLOSE
+            <div class="pop-up-center small-pop-up">
+                <button id="register-close-button" class="close-pop-up">&#215;
                 </button>
-                <div class="pop-up-message" >
+                <div class="pop-up-message">
+                    <h2>Log In</h2>
                     <form id="login-form">
-                        <fieldset>
-                            <label for="username">Username:</label>
-                            <input type="text" id="username" name="username">
-                        </fieldset>
-                        <fieldset>
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password">
-                        </fieldset>
-                        <input type="submit" value="Log in">
+                        <input class="username-password" type="text" id="username" name="username" placeholder="Username">
+                        <input class="username-password" type="password" id="password" name="password" placeholder="Password">
+                        <input type="submit" value="Log in" class="register-login-button button-colours-reverse">
                     </form>
-                    <p>No account? <button id="register-from-login">Sign up here</button></p>
+                    <p>No account? <button class="button-colours-reverse" id="register-from-login">Sign up here</button></p>
                 </div>
             </div>
         </div>
         <!-- register pop up window - set to hidden by default -->
         <div class="full-screen flex-container-center pop-up" id="register-popup">
-            <div class="pop-up-center event-pop-up">
-                <button id="register-close-button" class="close-popup">
-                    CLOSE
+            <div class="pop-up-center small-pop-up">
+                <button id="register-close-button" class="close-pop-up">&#215;
                 </button>
                 <div class="pop-up-message" >
+                    <h2>Register</h2>
                     <form id="register-form">
-                        <fieldset>
-                            <label for="username">Username:</label>
-                            <input type="text" id="username" name="username">
-                        </fieldset>
-                        <fieldset>
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password">
-                        </fieldset>
-                        <input type="submit" value="Register">
+                        <input class="username-password" type="text" id="username" name="username" placeholder="Username">
+                        <input class="username-password" type="password" id="password" name="password" placeholder="Password">
+                        <input type="submit" value="Register" class="register-login-button button-colours-reverse">
                     </form>
-                    <p>Already registered? <button id="login-from-register">Log in here</button></p>
+                    <p>Already registered? <button class="button-colours-reverse" id="login-from-register">Log in here</button></p>
                 </div>
             </div>
         </div>
         <!-- create new event pop up window - set to hidden by default -->
         <div class="full-screen flex-container-center pop-up" id="create-event-popup">
-            <div class="pop-up-center event-pop-up">
-                <button id="register-close-button" class="close-popup">
-                    CLOSE
+            <div class="pop-up-center small-pop-up">
+                <button id="register-close-button" class="close-pop-up">&#215;
                 </button>
                 <div class="pop-up-message" >
                     <form id="post-form">
@@ -83,10 +70,10 @@
                 </div>
             </div>
         </div>
+        <!-- full event details pop up window - set to hidden by default -->
         <div class="full-screen flex-container-center pop-up" id="full-event-popup">
             <div class="pop-up-center event-pop-up">
-                <button class="close-popup">
-                    CLOSE
+                <button id="register-close-button" class="close-pop-up">&#215;
                 </button>
                 <div class="pop-up-message" >
                     <div class="picture-container">
@@ -206,62 +193,32 @@
                     <img
                         src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
                         alt=""
+                        class="event-image"
                     />
                 </div>
                 <div class="event-details-container">
                     <div>
-                        <span id="event-date">Fri, 7 Jul - 9 Jul</span>
+                        <span class="event-date">Fri, 7 Jul - 9 Jul</span>
                     </div>
                     <div>
-                        <span id="event-title">Kent Country Show</span>
+                        <span class="event-title">Kent Country Show</span>
                     </div>
                     <div>
-                        <span id="event-location">Barcombe Mills</span>
+                        <span class="event-location">Barcombe Mills</span>
                     </div>
-                    <div>
-                        <span id="event-interested">600</span>
-                        interested &#9679;
-                        <span id="event-attending">85</span> attending
-                    </div>
-                    <div class="button-container">
-                        <button id="interested-button" type="submit">
-                            Interested
-                        </button>
-                        <button id="attending-button" type="submit">
-                            Attending
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="event-container">
-                <div class="picture-container">
-                    <img
-                        src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                        alt=""
-                    />
-                </div>
-                <div class="event-details-container">
-                    <div>
-                        <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                    </div>
-                    <div>
-                        <span id="event-title">Kent Country Show</span>
-                    </div>
-                    <div>
-                        <span id="event-location">Barcombe Mills</span>
-                    </div>
-                    <div>
-                        <span id="event-interested">600</span>
-                        interested &#9679;
-                        <span id="event-attending">85</span> attending
-                    </div>
-                    <div class="button-container">
-                        <button id="interested-button" type="submit">
-                            Interested
-                        </button>
-                        <button id="attending-button" type="submit">
-                            Attending
-                        </button>
+                    <div class="buttons-container">
+                        <div class="button-container">
+                            <span><span class="event-interested">600</span> &#9734;</span>
+                            <button class="interested-button" type="submit">
+                                Interested
+                            </button>
+                        </div>
+                        <div class="button-container">
+                            <span><span class="event-attending">55</span> &#10004;</span>
+                            <button class="attending-button" type="submit">
+                                Attending
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

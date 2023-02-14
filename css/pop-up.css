@@ -10,6 +10,16 @@
     visibility: hidden;
 }
 
+.small-pop-up {
+    width: 70vw;
+    height: 80vh;
+    max-width: 500px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .popup-visible {
     visibility: visible;
 }
@@ -22,34 +32,59 @@
     position: relative;
 }
 
-.close-popup {
+.close-pop-up {
     position: absolute;
     left: 20px;
-    top: 20px;
-    padding: 10px;
-    border-radius: 50px;
+    top: 10px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
     font-size: 30px;
-    text-align: center;
-    border: solid black;
     cursor: pointer;
 }
 
-.event-pop-up {
-    overflow-y: scroll;
-    width: 90vw;
-    height: 70vh;
-    max-width: 900px;
-    max-height: 900px;
-    min-height: 600px;
-}
-
-.event-pop-up::-webkit-scrollbar {
-    margin-right: 20px;
+.close-pop-up:hover {
+    color: gray;
 }
 
 .pop-up-message {
     text-align: center;
     flex-direction: column;
+}
+
+.small-pop-up .pop-up-message h2 {
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.pop-up-message form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pop-up-message form input {
+    font-size: large;
+}
+
+.username-password {
+    margin: 2px 0;
+    padding: 5px;
+    width: 290px;
+}
+
+.register-login-button {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+.pop-up-message p {
+    font-size: large;
+}
+
+.pop-up-message p button {
+    margin-left: 10px;
+    font-size: large;
 }
 
 .flex-container-center {

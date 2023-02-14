@@ -8,7 +8,7 @@ const createEventPopup = document.getElementById("create-event-popup");
 const fullEventPopup = document.getElementById("full-event-popup");
 const createNewEventButton = document.getElementById("create-new-event");
 
-const closeButtons = document.getElementsByClassName("close-popup");
+const closeButtons = document.getElementsByClassName("close-pop-up");
 const logInFromRegister = document.getElementById("login-from-register");
 const registerFromLogIn = document.getElementById("register-from-login");
 

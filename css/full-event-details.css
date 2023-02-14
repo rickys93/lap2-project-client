@@ -1,4 +1,14 @@
-#full-event-popup {
+.event-pop-up {
+    overflow-y: scroll;
+    width: 90vw;
+    height: 80vh;
+    max-width: 900px;
+    max-height: 900px;
+    min-height: 400px;
+}
+
+.event-pop-up::-webkit-scrollbar {
+    margin-right: 20px;
 }
 
 .full-event-container {
