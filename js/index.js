@@ -1,14 +1,14 @@
 const registerPopup = document.getElementById("register-popup");
-const signupButton = document.getElementById("sign-up-button");
-
 const loginPopup = document.getElementById("login-popup");
-const loginButton = document.getElementById("log-in-button");
-
 const createEventPopup = document.getElementById("create-event-popup");
 const fullEventPopup = document.getElementById("full-event-popup");
-const createNewEventButton = document.getElementById("create-new-event");
+const eventCreatedPopup = document.getElementById("event-created-popup");
 
+const signupButton = document.getElementById("sign-up-button");
+const loginButton = document.getElementById("log-in-button");
+const createNewEventButton = document.getElementById("create-new-event");
 const closeButtons = document.getElementsByClassName("close-pop-up");
+
 const logInFromRegister = document.getElementById("login-from-register");
 const registerFromLogIn = document.getElementById("register-from-login");
 
@@ -33,7 +33,12 @@ function toggleCreateEventPopup(e) {
     createEventPopup.classList.toggle("popup-visible");
 }
 
-function toggleLogInRegister(e) {
+function toggleEventCreatedPopup() {
+    eventCreatedPopup.classList.toggle("popup-visible");
+    createEventPopup.classList.toggle("popup-visible");
+}
+
+function toggleLogInRegister() {
     registerPopup.classList.toggle("popup-visible");
     loginPopup.classList.toggle("popup-visible");
 }

@@ -31,8 +31,7 @@ function createEventElement(data) {
     const clone = element.cloneNode(true);
 
     const date = formatDateWithoutTime(data.start_date, data.end_date);
-    clone.getElementsByClassName("event-image")[0].src =
-        "./images/325738924_5831057380305227_7516818067925943191_n.jpg";
+    clone.getElementsByClassName("event-image")[0].src = data.image_url;
     clone.getElementsByClassName("event-date")[0].textContent = date;
     clone.getElementsByClassName("event-title")[0].textContent = data.title;
     clone.getElementsByClassName("event-location")[0].textContent =
