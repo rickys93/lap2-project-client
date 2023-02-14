@@ -24,7 +24,6 @@ document
         const data = await response.json();
 
         if (response.status == 201) {
-            // TODO here close the popup
             registerPopup.classList.toggle("popup-visible");
             loginPopup.classList.toggle("popup-visible");
         } else {

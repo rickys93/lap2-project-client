@@ -19,9 +19,9 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (response.status == 200) {
-        localStorage.setIem("token", data.token);
+        localStorage.setItem("token", data.token);
         // close the pop up
-        window.location.assign("main.html");
+        loginPopup.classList.toggle("popup-visible");
     } else {
         alert(data.error);
     }
