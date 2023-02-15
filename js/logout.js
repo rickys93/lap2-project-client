@@ -4,4 +4,5 @@ logoutButton.addEventListener("click", async (e) => {
     localStorage.clear();
 
     logOut();
+    window.location.reload();
 });
