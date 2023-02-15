@@ -14,6 +14,7 @@
         <!-- <script src="./js/login.js" defer></script> -->
         <script src="./js/register.js" defer></script>
         <script src="./js/login.js" defer></script>
+        <script src="./js/logout.js" defer></script>
         <script src="./js/events.js" defer></script>
         <!-- <script src="./js/displayFullEvent.js" defer></script> -->
         <script src="./js/createEvent.js" defer></script>
@@ -91,6 +92,7 @@
                                 </option>
                             </select>
                         </fieldset>
+                        <fieldset><input id="fileInput" type="file" name="myFile" /></fieldset>
                         <fieldset>
                             <label for="start_date">Start Date:</label>
                             <input
@@ -108,6 +110,15 @@
                             <input type="submit" value="Create Event" />
                         </fieldset>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="full-screen flex-container-center pop-up" id="event-created-popup">
+            <div class="pop-up-center small-pop-up">
+                <button id="register-close-button" class="close-pop-up">&#215;
+                </button>
+                <div class="pop-up-message" >
+                   <h2>Event Created Successfully!</h2>
                 </div>
             </div>
         </div>
@@ -170,16 +181,68 @@
                 </div>
             </div>
         </div>
+        <!-- my events pop up window - set to hidden by default -->
+        <div class="full-screen flex-container-center pop-up" id="my-events-popup">
+            <div class="pop-up-center event-pop-up">
+                <button id="register-close-button" class="close-pop-up">&#215;
+                </button>
+                <h2 class="border">My Events</h2>
+                <div id="my-events-container" class="border">
+                
+                    <div class="event-container">
+                        <div class="picture-container">
+                            <img
+                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
+                                alt=""
+                                class="event-image"
+                            />
+                        </div>
+                        <div class="event-details-container">
+                            <div>
+                                <span class="event-date">srthrth</span>
+                            </div>
+                            <div>
+                                <span class="event-title">fghgsfh</span>
+                            </div>
+                            <div>
+                                <span class="event-location">sfgsfhg</span>
+                            </div>
+                            <div>
+                                <span class="event-category">fghsfgh</span>
+                            </div>
+                            <div class="buttons-container">
+                                <div class="button-container">
+                                    <span><span class="event-interested"></span> &#9734;</span>
+                                    <button class="interested-button" type="submit">
+                                        Interested
+                                    </button>
+                                </div>
+                                <div class="button-container">
+                                    <span><span class="event-attending"></span> &#10004;</span>
+                                    <button class="attending-button" type="submit">
+                                        Attending
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <nav class="navigation-bar">
             <div class="nav-left">
                 <a class="logo" href="./index.html">Florin</a>
             </div>
             <div class="nav-right">
-                <button class="button-colours" id="log-in-button" href="">
+                <button class="button-colours display-none" id="log-in-button" href="">
                     Log In
                 </button>
-                <button class="button-colours" id="sign-up-button" href="">
+                <button class="button-colours display-none" id="sign-up-button" href="">
                     Sign Up
+                </button>
+                <div id="display-username-container" class="display-username display-none">Welcome, <span id="display-username"></span>!</div>
+                <button class="button-colours display-none" id="log-out-button" href="">
+                    Log Out
                 </button>
             </div>
         </nav>
@@ -193,23 +256,33 @@
                         placeholder="🔎︎ Search..."
                     />
                 </div>
-                <li>All</li>
-                <li>Personal</li>
-                <li>Work</li>
-                <li>Party</li>
-                <li>Workshop</li>
-                <li>Charity</li>
-                <li>Big Event</li>
-                <li>Small Event</li>
                 <div class="sidebar-button-container">
                     <button
                         id="create-new-event"
-                        class="button-colours"
+                        class="button-colours-reverse display-none"
                         type="submit"
-                    >
+                        >
                         Create Event &#43;
                     </button>
                 </div>
+                <div class="sidebar-button-container">
+                    <button
+                        id="my-events-button"
+                        class="button-colours-reverse display-none"
+                        type="submit"
+                        >
+                        My Events
+                    </button>
+                </div>
+                <li class="category-list-item" id="category-all">All</li>
+                <li class="category-list-item" id="category-festival">Festivals</li>
+                <li class="category-list-item" id="category-music">Music</li>
+                <li class="category-list-item" id="category-charity">Charity</li>
+                <li class="category-list-item" id="category-education">Education</li>
+                <li class="category-list-item" id="category-art">Arts and Culture</li>
+                <li class="category-list-item" id="category-family">Family</li>
+                <li class="category-list-item" id="category-business">Business</li>
+
             </ul>
         </div>
         <div class="main-section" id="events">
@@ -223,23 +296,26 @@
                 </div>
                 <div class="event-details-container">
                     <div>
-                        <span class="event-date">Fri, 7 Jul - 9 Jul</span>
+                        <span class="event-date"></span>
                     </div>
                     <div>
-                        <span class="event-title">Kent Country Show</span>
+                        <span class="event-title"></span>
                     </div>
                     <div>
-                        <span class="event-location">Barcombe Mills</span>
+                        <span class="event-location"></span>
+                    </div>
+                    <div>
+                        <span class="event-category"></span>
                     </div>
                     <div class="buttons-container">
                         <div class="button-container">
-                            <span><span class="event-interested">600</span> &#9734;</span>
+                            <span><span class="event-interested"></span> &#9734;</span>
                             <button class="interested-button" type="submit">
                                 Interested
                             </button>
                         </div>
                         <div class="button-container">
-                            <span><span class="event-attending">55</span> &#10004;</span>
+                            <span><span class="event-attending"></span> &#10004;</span>
                             <button class="attending-button" type="submit">
                                 Attending
                             </button>

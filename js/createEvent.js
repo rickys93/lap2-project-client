@@ -10,27 +10,30 @@ form.addEventListener("submit", (event) => {
     start_date = formatDateTime(start_date);
     end_date = formatDateTime(end_date);
     const token = localStorage.getItem("token");
-    const formData = {
-        event_title,
-        event_description,
-        start_date,
-        end_date,
-        category_id,
-        token,
-        location,
-    };
+
+    // Get the uploaded file
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("event_title", event_title);
+    formData.append("event_description", event_description);
+    formData.append("start_date", start_date);
+    formData.append("end_date", end_date);
+    formData.append("category_id", category_id);
+    formData.append("token", token);
+    formData.append("location", location);
 
     fetch("http://localhost:3000/events", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: formData,
     })
         .then((response) => response.json())
         .then((data) => {
-            addEventToPage(data[0]);
+            addEventToPage(data);
             // TODO here we need to say event added succesfully
+            toggleEventCreatedPopup();
         })
         .catch((error) => {
             console.error(error);

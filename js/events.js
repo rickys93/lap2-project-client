@@ -29,14 +29,9 @@ const allEvents = document.getElementById("events");
 //   });  
 
 
-async function getAllEvents() {
+async function loadAllEvents() {
     clearAllEvents();
-    const options = {
-        headers: {
-          'Authorization': localStorage.getItem('token')
-        }
-      };
-    const response = await fetch("http://localhost:3000/events", options);
+    const response = await fetch("http://localhost:3000/events");
 
     if (response.status === 200) {
         const data = await response.json();
@@ -44,15 +39,78 @@ async function getAllEvents() {
             addEventToPage(item);
         });
     }
+
+    const options = {
+        headers: {
+            Authorization: localStorage.getItem("token"),
+        },
+    };
+
+    const authResponse = await fetch(
+        "http://localhost:3000/users/authorize",
+        options
+    );
+
+    if (authResponse.status === 200) {
+        const data = await authResponse.json();
+        const username = data.username;
+        displayLoggedIn(username);
+    } else {
+        displayLoggedOut();
+    }
 }
 
-getAllEvents();
+categoryListSidebar();
+loadAllEvents();
 
 function clearAllEvents() {
-    const events = allEvents.childNodes;
-    for (e of events) {
+    const allEvents = getAllEvents();
+    for (e of allEvents) {
         e.remove();
     }
+}
+
+function categoryListSidebar() {
+    document
+        .getElementById("category-all")
+        .classList.toggle("sidebar-selected");
+
+    for (e of categoryListItems) {
+        e.addEventListener("click", filterCategory);
+    }
+}
+
+function unselectListItems(target) {
+    for (e of categoryListItems) {
+        const className = e.className;
+        if (className.includes("sidebar-selected")) {
+            e.classList.toggle("sidebar-selected");
+        }
+    }
+    target.classList.toggle("sidebar-selected");
+}
+
+function filterCategory(e) {
+    const elementId = e.target.id;
+    unselectListItems(e.target);
+
+    const categoryId = elementId.replace("category-", "");
+    const events = getAllEvents();
+    events.forEach((e) => {
+        const category =
+            e.getElementsByClassName("event-category")[0].textContent;
+
+        if (categoryId === "all") {
+            e.style.display = "block";
+            return;
+        }
+
+        if (category.toLowerCase() !== categoryId) {
+            e.style.display = "none";
+        } else {
+            e.style.display = "block";
+        }
+    });
 }
 
 function addEventToPage(eventData) {
@@ -60,15 +118,32 @@ function addEventToPage(eventData) {
     allEvents.appendChild(eventContainer);
 }
 
+function capitalise(string) {
+    return string[0].toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function getAllEvents() {
+    const eventList = [];
+    const list = document.getElementById("events").childNodes;
+    for (e of list) {
+        if (e.id !== "dummy-event-container") {
+            eventList.push(e);
+        }
+    }
+    return eventList;
+}
+
 function createEventElement(data) {
     const element = document.getElementById("dummy-event-container");
     const clone = element.cloneNode(true);
 
     const date = formatDateWithoutTime(data.start_date, data.end_date);
-    clone.getElementsByClassName("event-image")[0].src =
-        "./images/325738924_5831057380305227_7516818067925943191_n.jpg";
+    clone.getElementsByClassName("event-image")[0].src = data.image_url;
     clone.getElementsByClassName("event-date")[0].textContent = date;
     clone.getElementsByClassName("event-title")[0].textContent = data.title;
+    clone.getElementsByClassName("event-category")[0].textContent = capitalise(
+        data.category_id
+    );
     clone.getElementsByClassName("event-location")[0].textContent =
         data.location;
     clone.getElementsByClassName("event-interested")[0].textContent =
@@ -183,3 +258,28 @@ function formatDateWithoutTime(start_date, end_date) {
         return `${startDate} ${startMonth} - ${endDate} ${endMonth}`;
     }
 }
+
+async function getUserEvents(e) {
+    const options = {
+        headers: {
+            Authorization: localStorage.getItem("token"),
+        },
+    };
+
+    const response = await fetch("http://localhost:3000/users/events", options);
+
+    if (response.status === 200) {
+        clearAllEvents();
+        myEventsButton.textContent = "All Events";
+        myEventsButton.removeEventListener("click", getUserEvents);
+        myEventsButton.addEventListener("click", loadAllEvents);
+
+        const userEvents = await response.json();
+
+        userEvents.forEach((e) => {
+            addEventToPage(e);
+        });
+    }
+}
+
+myEventsButton.addEventListener("click", getUserEvents);
