@@ -1,8 +1,42 @@
 const allEvents = document.getElementById("events");
 
+
+// const search = document.getElementById('search');
+
+// // search.addEventListener('click', clearAllEvents)
+
+// search.addEventListener("keydown", async function searching(event) {
+//     // clearAllEvents();
+//     const options = {
+//         headers: {
+//           'Authorization': localStorage.getItem('token')
+//         }
+//       };
+//     if (event.key === "Enter") {
+
+//         const response = await fetch(`http://localhost:3000/events/search/${search.value}`, options)
+//         clearAllEvents();
+//         if (response.status === 200) {
+//             const data = await response.json();
+//             if (data) {
+//                 data.forEach((item) => {
+//                     addEventToPage(item);
+//                 });
+//             }
+//         }
+//     }
+
+//   });  
+
+
 async function getAllEvents() {
     clearAllEvents();
-    const response = await fetch("http://localhost:3000/events");
+    const options = {
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      };
+    const response = await fetch("http://localhost:3000/events", options);
 
     if (response.status === 200) {
         const data = await response.json();
@@ -63,6 +97,8 @@ async function displayFullEventDetails(e) {
     const eventData = await response.json();
     displayFullEventDetailsInPopup(eventData);
 
+    fullEventPopup.id = eventId;
+
     toggleFullEventPopup();
 }
 
@@ -81,7 +117,24 @@ function displayFullEventDetailsInPopup(eventData) {
         eventData.location;
     document.getElementById("full-event-description").textContent =
         eventData.description;
+
+    document.getElementById('interested-button').addEventListener('click', () => interested(eventData))
 }
+
+
+async function interested(eventData) {
+    await fetch(`http://localhost:3000/events/interested/${eventData.id}`, {
+        method: 'PATCH'
+      })
+      .then(response => response.json())
+    //   .then(data => {
+    //     interestButton.innerHTML = `Interested ${data.interest}`;
+    //   })
+      .catch(error => {
+        console.error(error);
+      });
+    //   interestButton.addEventListener('click', () => subtractInterest(item), {once: true})
+};
 
 function findTargetElement(element) {
     if (element.className === "event-container") {
