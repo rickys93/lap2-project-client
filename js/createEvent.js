@@ -1,5 +1,4 @@
-const form = document.getElementById("post-form");
-form.addEventListener("submit", (event) => {
+function submitForm(event) {
     event.preventDefault();
     const event_title = document.getElementById("title").value;
     const event_description = document.getElementById("content").value;
@@ -38,7 +37,7 @@ form.addEventListener("submit", (event) => {
         .catch((error) => {
             console.error(error);
         });
-});
+}
 
 function formatDateTime(dateTimeStr) {
     const dateTime = new Date(dateTimeStr);
@@ -50,3 +49,5 @@ function formatDateTime(dateTimeStr) {
     const second = "00";
     return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
+
+module.exports = { submitForm };

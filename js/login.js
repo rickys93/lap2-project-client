@@ -1,4 +1,4 @@
-document.getElementById("login-form").addEventListener("submit", async (e) => {
+async function submitLoginForm(e) {
     e.preventDefault();
 
     const form = new FormData(e.target);
@@ -28,4 +28,6 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     } else {
         alert(data.error);
     }
-});
+}
+
+module.exports = { submitLoginForm };

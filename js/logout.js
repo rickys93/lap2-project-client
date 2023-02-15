@@ -1,7 +1,9 @@
-logoutButton.addEventListener("click", async (e) => {
+function submitLogoutForm(e) {
     e.preventDefault();
 
     localStorage.clear();
 
     logOut();
-});
+}
+
+module.exports = { submitLogoutForm };

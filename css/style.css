@@ -1,3 +1,13 @@
+@import url("create-event.css");
+@import url("full-event-details.css");
+@import url("login.css");
+@import url("pop-up.css");
+@import url("register.css");
+@import url("sidebar.css");
+@import url("navbar.css");
+@import url("main-section.css");
+@import url("my-events.css");
+
 :root {
     --containers: rgb(235, 235, 235);
     --containers-light: rgba(235, 235, 235, 0.5);
@@ -11,7 +21,7 @@
 
 *::-webkit-scrollbar {
     width: 10px;
-    background-color: #f5f5f5;
+    background-color: rgba(235, 235, 235, 0);
     border-radius: 10px;
 }
 
@@ -20,43 +30,17 @@
     border-radius: 10px;
 }
 
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #6e6e6e;
+    cursor: pointer;
+}
+
 body::-webkit-scrollbar {
     display: none;
 }
 
 .border {
     border: solid black;
-}
-
-.navigation-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 65px;
-    background-color: lightcoral;
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-    z-index: 1;
-    border-bottom: white solid 3px;
-}
-
-.logo {
-    text-decoration: none;
-    color: white;
-    font-size: 40px;
-    font-weight: 800;
-    margin: 0px 15px;
-}
-
-.nav-right {
-    display: flex;
-    align-items: center;
-    margin-right: 5px;
 }
 
 .button-colours {
@@ -91,131 +75,6 @@ body::-webkit-scrollbar {
     background-color: white;
     color: coral;
     border: coral solid;
-}
-
-.category-sidebar {
-    width: 250px;
-    background-color: lightcoral;
-    color: white;
-    position: fixed;
-    top: 65px;
-    left: 0;
-    height: calc(100vh - 65px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.category-list {
-    padding: 0px auto;
-    list-style: none;
-    font-size: 17px;
-}
-
-.category-list input {
-    width: 200px;
-    border: none;
-    padding: 7px;
-    font-size: 15px;
-    border-radius: 20px;
-    color: coral;
-    text-align: center;
-    margin: 10px 0;
-}
-
-.category-list li {
-    padding: 10px 0;
-    padding-left: 25px;
-    margin: 0 5px;
-    border-radius: 2px;
-}
-
-.category-list li:hover {
-    background-color: white;
-    color: coral;
-    cursor: pointer;
-}
-
-.sidebar-button-container {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-.sidebar-button-container button {
-    width: 220px;
-    font-size: 15px;
-}
-
-.sidebar-selected {
-    background-color: white;
-    color: coral;
-}
-
-.main-section {
-    overflow-y: auto;
-    display: flex;
-    flex-wrap: wrap;
-    position: absolute;
-    top: 68px;
-    left: 250px;
-    justify-content: center;
-    height: calc(100vh - 68px);
-    border-right: 2px white solid;
-}
-
-.event-container {
-    flex: 1 0 42%;
-    background-color: var(--containers);
-    min-width: 300px;
-    max-width: 500px;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    display: none;
-}
-.event-container:hover {
-    background-color: var(--containers-light);
-    cursor: pointer;
-}
-
-.picture-container img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.event-details-container {
-    padding: 10px;
-}
-
-.buttons-container {
-    display: flex;
-}
-.button-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.button-container span {
-    text-align: center;
-}
-
-.button-container button {
-    background-color: lightcoral;
-    border: solid var(--containers);
-    padding: 5px;
-    color: white;
-    font-weight: 600;
-    border-radius: 5px;
-}
-
-.button-container button:hover {
-    background-color: white;
-    border: solid lightcoral;
-    padding: 5px;
-    color: lightcoral;
-    font-weight: 600;
-    cursor: pointer;
 }
 
 #my-events-button {

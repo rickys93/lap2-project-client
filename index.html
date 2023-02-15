@@ -5,19 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./css/style.css" />
-        <link rel="stylesheet" href="./css/pop-up.css" />
-        <link rel="stylesheet" href="./css/full-event-details.css" />
-        <link rel="stylesheet" href="./css/login.css" />
-        <link rel="stylesheet" href="./css/register.css" />
-        <link rel="stylesheet" href="./css/create-event.css" />
         <script src="./js/index.js" defer></script>
-        <!-- <script src="./js/login.js" defer></script> -->
-        <script src="./js/register.js" defer></script>
-        <script src="./js/login.js" defer></script>
-        <script src="./js/logout.js" defer></script>
-        <script src="./js/events.js" defer></script>
-        <!-- <script src="./js/displayFullEvent.js" defer></script> -->
-        <script src="./js/createEvent.js" defer></script>
         <title>Florin Events</title>
     </head>
     <body>
@@ -59,7 +47,7 @@
                 <button id="register-close-button" class="close-pop-up">&#215;
                 </button>
                 <div class="pop-up-message" >
-                    <form id="post-form">
+                    <form id="create-event-form">
                         <fieldset>
                             <label for="title">Title:</label>
                             <input type="text" id="title" name="event_title" required />
@@ -183,49 +171,12 @@
         </div>
         <!-- my events pop up window - set to hidden by default -->
         <div class="full-screen flex-container-center pop-up" id="my-events-popup">
-            <div class="pop-up-center event-pop-up">
+            <div class="my-event-pop-up">
                 <button id="register-close-button" class="close-pop-up">&#215;
                 </button>
-                <h2 class="border">My Events</h2>
-                <div id="my-events-container" class="border">
+                <h2>My Events</h2>
                 
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                                class="event-image"
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span class="event-date">srthrth</span>
-                            </div>
-                            <div>
-                                <span class="event-title">fghgsfh</span>
-                            </div>
-                            <div>
-                                <span class="event-location">sfgsfhg</span>
-                            </div>
-                            <div>
-                                <span class="event-category">fghsfgh</span>
-                            </div>
-                            <div class="buttons-container">
-                                <div class="button-container">
-                                    <span><span class="event-interested"></span> &#9734;</span>
-                                    <button class="interested-button" type="submit">
-                                        Interested
-                                    </button>
-                                </div>
-                                <div class="button-container">
-                                    <span><span class="event-attending"></span> &#10004;</span>
-                                    <button class="attending-button" type="submit">
-                                        Attending
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="my-events-container">
                 </div>
             </div>
         </div>
