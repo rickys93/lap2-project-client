@@ -78,6 +78,8 @@ function logIn(username) {
     logoutButton.classList.toggle("display-none");
     document.getElementById("display-username").textContent = username;
     usernameDisplay.classList.toggle("display-none");
+    createNewEventButton.classList.toggle("display-block");
+    myEventsButton.classList.toggle("display-block");
 }
 
 // submit forms
@@ -222,40 +224,17 @@ function filterCategory(e) {
     });
 }
 
-const search = document.getElementById("search");
-
-// search.addEventListener('click', clearAllEvents)
-
-// search.addEventListener("keydown", async function searching(event) {
-//     clearAllEvents();
-//     const options = {
-//         headers: {
-//             Authorization: localStorage.getItem("token"),
-//         },
-//     };
-//     if (event.key === "Enter") {
-//         const response = await fetch(
-//             `http://localhost:3000/events/search/${search.value}`,
-//             options
-//         );
-//         clearAllEvents();
-//         if (response.status === 200) {
-//             const data = await response.json();
-//             if (data) {
-//                 data.forEach((item) => {
-//                     addEventToPage(item);
-//                 });
-//             }
-//         }
-//     }
-// });
-
 const allEvents = document.getElementById("events");
 
 async function loadAllEvents() {
     clearAllEvents();
-    const response = await fetch("http://localhost:3000/events");
+    const options = {
+        headers: {
+            Authorization: localStorage.getItem("token"),
+        },
+    };
 
+    const response = await fetch("http://localhost:3000/events", options);
     if (response.status === 200) {
         const data = await response.json();
         data.forEach((item) => {
@@ -263,17 +242,15 @@ async function loadAllEvents() {
         });
     }
 
-    const options = {
-        headers: {
-            Authorization: localStorage.getItem("token"),
-        },
-    };
+    // if one of the buttons is showing, we are already logged in/out so stop here
+    if (buttonIsShowing(loginButton) || buttonIsShowing(logoutButton)) {
+        return;
+    }
 
     const authResponse = await fetch(
         "http://localhost:3000/users/authorize",
         options
     );
-
     if (authResponse.status === 200) {
         const data = await authResponse.json();
         const username = data.username;
@@ -353,6 +330,7 @@ async function displayFullEventDetails(e) {
 function displayFullEventDetailsInPopup(eventData) {
     const date = formatDates(eventData.start_date, eventData.end_date);
     document.getElementById("event-date").textContent = date;
+    document.getElementById("full-event-picture").src = eventData.image_url;
     document.getElementById("event-title").textContent = eventData.title;
     document.getElementById("event-location").textContent = eventData.location;
     document.getElementById("full-event-interested").textContent =
@@ -372,17 +350,91 @@ function displayFullEventDetailsInPopup(eventData) {
 }
 
 async function interested(eventData) {
+    //CANT SET eventInterestedCount to updated value;
+    const fullEventInterestedCount = document.getElementById(
+        "full-event-interested"
+    );
+
+    // const eventInterestedCount = document.getElementById('event-interested');
+
     await fetch(`http://localhost:3000/events/interested/${eventData.id}`, {
         method: "PATCH",
     })
         .then((response) => response.json())
-        //   .then(data => {
-        //     interestButton.innerHTML = `Interested ${data.interest}`;
-        //   })
+        .then((data) => {
+            fullEventInterestedCount.innerHTML = data.interest;
+        })
         .catch((error) => {
             console.error(error);
         });
-    //   interestButton.addEventListener('click', () => subtractInterest(item), {once: true})
+    //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
+    document
+        .getElementById("interested-button")
+        .addEventListener("click", () => uninterested(eventData), {
+            once: true,
+        });
+}
+
+async function uninterested(eventData) {
+    const fullEventInterestedCount = document.getElementById(
+        "full-event-interested"
+    );
+    await fetch(`http://localhost:3000/events/not_interested/${eventData.id}`, {
+        method: "PATCH",
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            fullEventInterestedCount.innerHTML = data.interest;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
+    document
+        .getElementById("interested-button")
+        .addEventListener("click", () => interested(eventData), { once: true });
+}
+
+async function attending(eventData) {
+    const fullEventAttendingCount = document.getElementById(
+        "full-event-attending"
+    );
+    await fetch(`http://localhost:3000/events/attend/${eventData.id}`, {
+        method: "PATCH",
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            fullEventAttendingCount.innerHTML = data.attending;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
+    document
+        .getElementById("attending-button")
+        .addEventListener("click", () => not_attending(eventData), {
+            once: true,
+        });
+}
+
+async function not_attending(eventData) {
+    const fullEventAttendingCount = document.getElementById(
+        "full-event-attending"
+    );
+    await fetch(`http://localhost:3000/events/not_attending/${eventData.id}`, {
+        method: "PATCH",
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            fullEventAttendingCount.innerHTML = data.attending;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
+    document
+        .getElementById("attending-button")
+        .addEventListener("click", () => attending(eventData), { once: true });
 }
 
 function findTargetElement(element) {
@@ -433,6 +485,34 @@ function submitNewEventFrom(event) {
             console.error(error);
         });
 }
+
+//  SECTION
+
+const search = document.getElementById("search");
+
+search.addEventListener("keydown", async function searching(event) {
+    const options = {
+        headers: {
+            Authorization: localStorage.getItem("token"),
+        },
+    };
+    if (event.key === "Enter") {
+        if (!search.value) {
+            loadAllEvents();
+        }
+        const response = await fetch(
+            `http://localhost:3000/events/search/${search.value}`,
+            options
+        );
+        if (response.status === 200) {
+            clearAllEvents();
+            const data = await response.json();
+            data.forEach((item) => {
+                addEventToPage(item);
+            });
+        }
+    }
+});
 
 // MY EVENTS SECTION
 myEventsContainer = document.getElementById("my-events-container");
@@ -534,6 +614,10 @@ function formatDateWithoutTime(start_date, end_date) {
 
 function capitalise(string) {
     return string[0].toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function buttonIsShowing(button) {
+    return !button.className.includes("display-none");
 }
 
 categoryListSidebar();

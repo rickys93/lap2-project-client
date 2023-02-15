@@ -4,6 +4,11 @@ function submitLogoutForm(e) {
     localStorage.clear();
 
     logOut();
+<<<<<<< HEAD
 }
 
 module.exports = { submitLogoutForm };
+=======
+    window.location.reload();
+});
+>>>>>>> staging
