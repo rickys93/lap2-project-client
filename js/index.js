@@ -90,6 +90,4 @@ function logIn(username) {
     logoutButton.classList.toggle("display-none");
     document.getElementById("display-username").textContent = username;
     usernameDisplay.classList.toggle("display-none");
-    createNewEventButton.classList.toggle("display-none");
-    myEventsButton.classList.toggle("display-none");
 }
