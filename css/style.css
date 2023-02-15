@@ -144,6 +144,12 @@ body::-webkit-scrollbar {
 
 .sidebar-button-container button {
     width: 220px;
+    font-size: 15px;
+}
+
+.sidebar-selected {
+    background-color: white;
+    color: coral;
 }
 
 .main-section {
@@ -210,4 +216,26 @@ body::-webkit-scrollbar {
     color: lightcoral;
     font-weight: 600;
     cursor: pointer;
+}
+
+#my-events-button {
+    margin-bottom: 20px;
+}
+
+#my-events-popup .pop-up-center {
+    flex-direction: column;
+}
+
+#my-events-container {
+    display: flex;
+    flex-wrap: wrap;
+    top: 68px;
+    left: 250px;
+    justify-content: center;
+    height: calc(100vh - 68px);
+    border-right: 2px white solid;
+}
+
+.visibility-hidden {
+    visibility: hidden;
 }

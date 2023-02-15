@@ -16,6 +16,8 @@ const closeButtons = document.getElementsByClassName("close-pop-up");
 const logInFromRegister = document.getElementById("login-from-register");
 const registerFromLogIn = document.getElementById("register-from-login");
 
+const categoryListItems = document.getElementsByClassName("category-list-item");
+
 function closePopup(e) {
     const popup = e.target.parentNode.parentNode;
     popup.classList.toggle("popup-visible");
@@ -62,6 +64,8 @@ function displayLoggedIn(username) {
     logoutButton.classList.toggle("display-none");
     document.getElementById("display-username").textContent = username;
     usernameDisplay.classList.toggle("display-none");
+    createNewEventButton.classList.toggle("display-none");
+    myEventsButton.classList.toggle("display-none");
 }
 
 function displayLoggedOut() {
@@ -76,6 +80,8 @@ function logOut() {
     logoutButton.classList.toggle("display-none");
     document.getElementById("display-username").textContent = "";
     usernameDisplay.classList.toggle("display-none");
+    createNewEventButton.classList.toggle("display-none");
+    myEventsButton.classList.toggle("display-none");
 }
 
 function logIn(username) {
@@ -84,4 +90,6 @@ function logIn(username) {
     logoutButton.classList.toggle("display-none");
     document.getElementById("display-username").textContent = username;
     usernameDisplay.classList.toggle("display-none");
+    createNewEventButton.classList.toggle("display-none");
+    myEventsButton.classList.toggle("display-none");
 }

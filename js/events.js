@@ -1,6 +1,6 @@
 const allEvents = document.getElementById("events");
 
-async function getAllEvents() {
+async function loadAllEvents() {
     clearAllEvents();
 
     const response = await fetch("http://localhost:3000/events");
@@ -32,18 +32,77 @@ async function getAllEvents() {
     }
 }
 
-getAllEvents();
+categoryListSidebar();
+loadAllEvents();
 
 function clearAllEvents() {
-    const events = allEvents.childNodes;
-    for (e of events) {
+    const allEvents = getAllEvents();
+    for (e of allEvents) {
         e.remove();
     }
+}
+
+function categoryListSidebar() {
+    document
+        .getElementById("category-all")
+        .classList.toggle("sidebar-selected");
+
+    for (e of categoryListItems) {
+        e.addEventListener("click", filterCategory);
+    }
+}
+
+function unselectListItems(target) {
+    for (e of categoryListItems) {
+        const className = e.className;
+        if (className.includes("sidebar-selected")) {
+            e.classList.toggle("sidebar-selected");
+        }
+    }
+    target.classList.toggle("sidebar-selected");
+}
+
+function filterCategory(e) {
+    const elementId = e.target.id;
+    unselectListItems(e.target);
+
+    const categoryId = elementId.replace("category-", "");
+    const events = getAllEvents();
+    events.forEach((e) => {
+        const category =
+            e.getElementsByClassName("event-category")[0].textContent;
+
+        if (categoryId === "all") {
+            e.style.display = "block";
+            return;
+        }
+
+        if (category.toLowerCase() !== categoryId) {
+            e.style.display = "none";
+        } else {
+            e.style.display = "block";
+        }
+    });
 }
 
 function addEventToPage(eventData) {
     const eventContainer = createEventElement(eventData);
     allEvents.appendChild(eventContainer);
+}
+
+function capitalise(string) {
+    return string[0].toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function getAllEvents() {
+    const eventList = [];
+    const list = document.getElementById("events").childNodes;
+    for (e of list) {
+        if (e.id !== "dummy-event-container") {
+            eventList.push(e);
+        }
+    }
+    return eventList;
 }
 
 function createEventElement(data) {
@@ -54,6 +113,9 @@ function createEventElement(data) {
     clone.getElementsByClassName("event-image")[0].src = data.image_url;
     clone.getElementsByClassName("event-date")[0].textContent = date;
     clone.getElementsByClassName("event-title")[0].textContent = data.title;
+    clone.getElementsByClassName("event-category")[0].textContent = capitalise(
+        data.category_id
+    );
     clone.getElementsByClassName("event-location")[0].textContent =
         data.location;
     clone.getElementsByClassName("event-interested")[0].textContent =
@@ -163,7 +225,7 @@ async function getUserEvents(e) {
         clearAllEvents();
         myEventsButton.textContent = "All Events";
         myEventsButton.removeEventListener("click", getUserEvents);
-        myEventsButton.addEventListener("click", getAllEvents);
+        myEventsButton.addEventListener("click", loadAllEvents);
 
         const userEvents = await response.json();
 
