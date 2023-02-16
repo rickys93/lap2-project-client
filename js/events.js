@@ -1,26 +1,4 @@
-const allEvents = document.getElementById("events");
-const search = document.getElementById("search");
-
-search.addEventListener("keydown", async function searching(event) {
-    const options = {
-        headers: {
-            Authorization: localStorage.getItem("token"),
-        },
-    };
-    if (event.key === "Enter") {
-        const response = await fetch(
-            `http://localhost:3000/events/search/${search.value}`,
-            options
-        );
-        if (response.status === 200) {
-            clearAllEvents();
-            const data = await response.json();
-            data.forEach((item) => {
-                addEventToPage(item);
-            });
-        }
-    }
-});
+const mainEventsContainer = document.getElementById("events");
 
 async function loadAllEvents() {
     clearAllEvents();
@@ -29,6 +7,7 @@ async function loadAllEvents() {
             Authorization: localStorage.getItem("token"),
         },
     };
+
     const response = await fetch("http://localhost:3000/events", options);
     if (response.status === 200) {
         const data = await response.json();
@@ -36,6 +15,12 @@ async function loadAllEvents() {
             addEventToPage(item);
         });
     }
+
+    // if one of the buttons is showing, we are already logged in/out so stop here
+    if (buttonIsShowing(loginButton) || buttonIsShowing(logoutButton)) {
+        return;
+    }
+
     const authResponse = await fetch(
         "http://localhost:3000/users/authorize",
         options
@@ -43,73 +28,17 @@ async function loadAllEvents() {
     if (authResponse.status === 200) {
         const data = await authResponse.json();
         const username = data.username;
-        console.log(username);
         displayLoggedIn(username);
     } else {
         displayLoggedOut();
     }
 }
 
-categoryListSidebar();
-loadAllEvents();
-
 function clearAllEvents() {
     const allEvents = getAllEvents();
     for (e of allEvents) {
         e.remove();
     }
-}
-
-function categoryListSidebar() {
-    document
-        .getElementById("category-all")
-        .classList.toggle("sidebar-selected");
-
-    for (e of categoryListItems) {
-        e.addEventListener("click", filterCategory);
-    }
-}
-
-function unselectListItems(target) {
-    for (e of categoryListItems) {
-        const className = e.className;
-        if (className.includes("sidebar-selected")) {
-            e.classList.toggle("sidebar-selected");
-        }
-    }
-    target.classList.toggle("sidebar-selected");
-}
-
-function filterCategory(e) {
-    const elementId = e.target.id;
-    unselectListItems(e.target);
-
-    const categoryId = elementId.replace("category-", "");
-    const events = getAllEvents();
-    events.forEach((e) => {
-        const category =
-            e.getElementsByClassName("event-category")[0].textContent;
-
-        if (categoryId === "all") {
-            e.style.display = "block";
-            return;
-        }
-
-        if (category.toLowerCase() !== categoryId) {
-            e.style.display = "none";
-        } else {
-            e.style.display = "block";
-        }
-    });
-}
-
-function addEventToPage(eventData) {
-    const eventContainer = createEventElement(eventData);
-    allEvents.appendChild(eventContainer);
-}
-
-function capitalise(string) {
-    return string[0].toUpperCase() + string.slice(1).toLowerCase();
 }
 
 function getAllEvents() {
@@ -121,6 +50,11 @@ function getAllEvents() {
         }
     }
     return eventList;
+}
+
+function addEventToPage(eventData) {
+    const eventContainer = createEventElement(eventData);
+    mainEventsContainer.appendChild(eventContainer);
 }
 
 function createEventElement(data) {
@@ -148,209 +82,3 @@ function createEventElement(data) {
 
     return clone;
 }
-
-async function displayFullEventDetails(e) {
-    const targetElement = findTargetElement(e.target);
-    const eventId = parseInt(targetElement.id);
-
-    const response = await fetch("http://localhost:3000/events/" + eventId);
-
-    if (response.status !== 200) {
-        return;
-    }
-
-    const eventData = await response.json();
-    displayFullEventDetailsInPopup(eventData);
-
-    fullEventPopup.id = eventId;
-
-    toggleFullEventPopup();
-}
-
-function displayFullEventDetailsInPopup(eventData) {
-    const date = formatDates(eventData.start_date, eventData.end_date);
-    document.getElementById("event-date").textContent = date;
-    document.getElementById("event-title").textContent = eventData.title;
-    document.getElementById("event-location").textContent = eventData.location;
-    document.getElementById("full-event-interested").textContent =
-        eventData.interest;
-    document.getElementById("full-event-attending").textContent =
-        eventData.attending;
-    document.getElementById("full-event-username").textContent =
-        eventData.username;
-    document.getElementById("full-event-location").textContent =
-        eventData.location;
-    document.getElementById("full-event-description").textContent =
-        eventData.description;
-
-    document
-        .getElementById("interested-button")
-        .addEventListener("click", () => interested(eventData), { once: true });
-    document
-        .getElementById("attending-button")
-        .addEventListener("click", () => attending(eventData), { once: true });
-}
-
-async function interested(eventData) {
-    //CANT SET eventInterestedCount to updated value;
-    const fullEventInterestedCount = document.getElementById(
-        "full-event-interested"
-    );
-
-    // const eventInterestedCount = document.getElementById('event-interested');
-
-    await fetch(`http://localhost:3000/events/interested/${eventData.id}`, {
-        method: "PATCH",
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            fullEventInterestedCount.innerHTML = data.interest;
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
-    document
-        .getElementById("interested-button")
-        .addEventListener("click", () => uninterested(eventData), {
-            once: true,
-        });
-}
-
-async function uninterested(eventData) {
-    const fullEventInterestedCount = document.getElementById(
-        "full-event-interested"
-    );
-    await fetch(`http://localhost:3000/events/not_interested/${eventData.id}`, {
-        method: "PATCH",
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            fullEventInterestedCount.innerHTML = data.interest;
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
-    document
-        .getElementById("interested-button")
-        .addEventListener("click", () => interested(eventData), { once: true });
-}
-
-async function attending(eventData) {
-    const fullEventAttendingCount = document.getElementById(
-        "full-event-attending"
-    );
-    await fetch(`http://localhost:3000/events/attend/${eventData.id}`, {
-        method: "PATCH",
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            fullEventAttendingCount.innerHTML = data.attending;
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
-    document
-        .getElementById("attending-button")
-        .addEventListener("click", () => not_attending(eventData), {
-            once: true,
-        });
-}
-
-async function not_attending(eventData) {
-    const fullEventAttendingCount = document.getElementById(
-        "full-event-attending"
-    );
-    await fetch(`http://localhost:3000/events/not_attending/${eventData.id}`, {
-        method: "PATCH",
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            fullEventAttendingCount.innerHTML = data.attending;
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
-    document
-        .getElementById("attending-button")
-        .addEventListener("click", () => attending(eventData), { once: true });
-}
-
-function findTargetElement(element) {
-    if (element.className === "event-container") {
-        return element;
-    }
-
-    return findTargetElement(element.parentNode);
-}
-
-function formatDates(start_date, end_date) {
-    const options = {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-    };
-
-    const startDateObj = new Date(start_date);
-    const endDateObj = new Date(end_date);
-
-    const startDateStr = startDateObj.toLocaleDateString("en-US", options);
-    const endDateStr = endDateObj.toLocaleDateString("en-US", options);
-
-    return `${startDateStr} - ${endDateStr}`;
-}
-
-function formatDateWithoutTime(start_date, end_date) {
-    const start = new Date(start_date);
-    const end = new Date(end_date);
-
-    const startMonth = new Intl.DateTimeFormat("en-US", {
-        month: "short",
-    }).format(start);
-    const endMonth = new Intl.DateTimeFormat("en-US", {
-        month: "short",
-    }).format(end);
-    const startDate = start.getDate();
-    const endDate = end.getDate();
-
-    if (startMonth === endMonth && startDate === endDate) {
-        return `${startDate} ${startMonth}`;
-    } else if (startMonth === endMonth) {
-        return `${startDate} - ${endDate} ${startMonth}`;
-    } else {
-        return `${startDate} ${startMonth} - ${endDate} ${endMonth}`;
-    }
-}
-
-async function getUserEvents(e) {
-    const options = {
-        headers: {
-            Authorization: localStorage.getItem("token"),
-        },
-    };
-
-    const response = await fetch("http://localhost:3000/users/events", options);
-
-    if (response.status === 200) {
-        clearAllEvents();
-        myEventsButton.textContent = "All Events";
-        myEventsButton.removeEventListener("click", getUserEvents);
-        // myEventsButton.addEventListener("click", loadAllEvents);
-
-        const userEvents = await response.json();
-
-        userEvents.forEach((e) => {
-            addEventToPage(e);
-        });
-        myEventsButton.addEventListener("click", loadAllEvents);
-    } else {
-        console.log("not working");
-    }
-}
-
-myEventsButton.addEventListener("click", getUserEvents);

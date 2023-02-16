@@ -1,0 +1,127 @@
+const usernameDisplay = document.getElementById("display-username-container");
+
+function displayLoggedIn(username) {
+    logoutButton.classList.toggle("display-none");
+    document.getElementById("display-username").textContent = username;
+    usernameDisplay.classList.toggle("display-none");
+    createNewEventButton.classList.toggle("display-none");
+    myEventsButton.classList.toggle("display-none");
+}
+
+function displayLoggedOut() {
+    loginButton.classList.toggle("display-none");
+    signupButton.classList.toggle("display-none");
+    document.getElementById("display-username").textContent = "";
+}
+
+function logOut() {
+    loginButton.classList.toggle("display-none");
+    signupButton.classList.toggle("display-none");
+    logoutButton.classList.toggle("display-none");
+    document.getElementById("display-username").textContent = "";
+    usernameDisplay.classList.toggle("display-none");
+    createNewEventButton.classList.toggle("display-none");
+    myEventsButton.classList.toggle("display-none");
+}
+
+function logIn(username) {
+    loginButton.classList.toggle("display-none");
+    signupButton.classList.toggle("display-none");
+    logoutButton.classList.toggle("display-none");
+    document.getElementById("display-username").textContent = username;
+    usernameDisplay.classList.toggle("display-none");
+    createNewEventButton.classList.toggle("display-block");
+    myEventsButton.classList.toggle("display-block");
+}
+
+async function submitLogoutForm(e) {
+    e.preventDefault();
+
+    const options = {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+        },
+    };
+
+    const response = await fetch("http://localhost:3000/users/logout", options);
+
+    localStorage.clear();
+    logOut();
+}
+
+async function submitRegisterForm(e) {
+    e.preventDefault();
+
+    const form = new FormData(e.target);
+
+    const options = {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: form.get("username"),
+            password: form.get("password"),
+        }),
+    };
+
+    const response = await fetch(
+        "http://localhost:3000/users/register",
+        options
+    );
+    const data = await response.json();
+
+    if (response.status == 201) {
+        registerPopup.classList.toggle("popup-visible");
+        loginPopup.classList.toggle("popup-visible");
+    } else {
+        alert(data.error);
+    }
+}
+
+async function submitLoginForm(e) {
+    e.preventDefault();
+
+    const form = new FormData(e.target);
+
+    const options = {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: form.get("username"),
+            password: form.get("password"),
+        }),
+    };
+
+    const response = await fetch("http://localhost:3000/users/login", options);
+    const data = await response.json();
+
+    if (response.status == 200) {
+        localStorage.setItem("token", data.token);
+        // close the pop up
+        loginPopup.classList.toggle("popup-visible");
+        myEventsButton.classList.toggle("display-none");
+        createNewEventButton.classList.toggle("display-none");
+        logIn(form.get("username"));
+    } else {
+        alert(data.error);
+    }
+}
+
+// add events listenders to buttons
+document
+    .getElementById("login-form")
+    .addEventListener("submit", submitLoginForm);
+document
+    .getElementById("register-form")
+    .addEventListener("submit", submitRegisterForm);
+
+logoutButton.addEventListener("click", submitLogoutForm);
+logInFromRegister.addEventListener("click", toggleLogInRegister);
+registerFromLogIn.addEventListener("click", toggleLogInRegister);

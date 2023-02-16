@@ -1,4 +1,8 @@
-function submitForm(event) {
+// submit forms
+const createEventForm = document.getElementById("create-event-form");
+createEventForm.addEventListener("submit", submitNewEventForm);
+
+function submitNewEventForm(event) {
     event.preventDefault();
     const event_title = document.getElementById("title").value;
     const event_description = document.getElementById("content").value;
@@ -38,16 +42,3 @@ function submitForm(event) {
             console.error(error);
         });
 }
-
-function formatDateTime(dateTimeStr) {
-    const dateTime = new Date(dateTimeStr);
-    const year = dateTime.getFullYear();
-    const month = (dateTime.getMonth() + 1).toString().padStart(2, "0");
-    const day = dateTime.getDate().toString().padStart(2, "0");
-    const hour = dateTime.getHours().toString().padStart(2, "0");
-    const minute = dateTime.getMinutes().toString().padStart(2, "0");
-    const second = "00";
-    return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
-}
-
-module.exports = { submitForm };

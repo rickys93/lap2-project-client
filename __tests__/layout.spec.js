@@ -8,8 +8,8 @@ let document;
 
 describe("index.html", () => {
     beforeEach(async () => {
-        // fetch.resetMocks();
-        console.log(fetch);
+        fetch.resetMocks();
+        // console.log(fetch);
         dom = await renderDOM("./index.html");
         document = await dom.window.document;
     });
