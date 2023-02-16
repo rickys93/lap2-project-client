@@ -49,12 +49,14 @@ function toggleLogInRegister() {
 }
 
 async function displayFullEventDetails(e) {
+    interestedButton.removeEventListener("click", uninterested);
+    attendingButton.removeEventListener("click", not_attending);
+    interestedButton.addEventListener("click", interested);
+    attendingButton.addEventListener("click", attending);
     const targetElement = findTargetElement(e.target);
     const eventId = parseInt(targetElement.id);
 
-    const response = await fetch(
-        "https://florin-server.onrender.com/events/" + eventId
-    );
+    const response = await fetch(apiUrl + "events/" + eventId);
 
     if (response.status !== 200) {
         return;

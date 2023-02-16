@@ -8,10 +8,7 @@ async function loadAllEvents() {
         },
     };
 
-    const response = await fetch(
-        "https://florin-server.onrender.com/events",
-        options
-    );
+    const response = await fetch(apiUrl + "events", options);
     if (response.status === 200) {
         const data = await response.json();
         data.forEach((item) => {
@@ -24,10 +21,7 @@ async function loadAllEvents() {
         return;
     }
 
-    const authResponse = await fetch(
-        "https://florin-server.onrender.com/users/authorize",
-        options
-    );
+    const authResponse = await fetch(apiUrl + "users/authorize", options);
     if (authResponse.status === 200) {
         const data = await authResponse.json();
         const username = data.username;
@@ -94,10 +88,7 @@ async function deleteEvent(eventId) {
             Authorization: localStorage.getItem("token"),
         },
     };
-    const response = await fetch(
-        "https://florin-server.onrender.com/events/" + eventId,
-        options
-    );
+    const response = await fetch(apiUrl + "events/" + eventId, options);
     if (response.status === 200) {
         const data = await response.json();
         deleteEventFromPage(data.id);

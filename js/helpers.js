@@ -1,3 +1,5 @@
+const apiUrl = "https://florin-server.onrender.com/";
+
 // HELPER FUNCTIONS
 function findTargetElement(element) {
     if (element.className === "event-container") {

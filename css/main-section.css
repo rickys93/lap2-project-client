@@ -8,6 +8,7 @@
     justify-content: center;
     height: calc(100vh - 68px);
     border-right: 2px white solid;
+    align-items: stretch;
 }
 
 .event-container {
@@ -20,7 +21,9 @@
     border-radius: 10px;
     display: none;
     align-self: flex-start;
+    min-width: 150px;
 }
+
 .event-container:hover {
     background-color: var(--containers-light);
     cursor: pointer;
@@ -85,6 +88,6 @@
 }
 .delete-button:hover {
     background-color: white;
-    color: coral;
-    border: coral solid;
+    color: lightcoral;
+    border: lightcoral solid;
 }

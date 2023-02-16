@@ -1,3 +1,6 @@
+const interestedButton = document.getElementById("interested-button");
+const attendingButton = document.getElementById("attending-button");
+
 async function interested(eventData) {
     //CANT SET eventInterestedCount to updated value;
     const fullEventInterestedCount = document.getElementById(
@@ -6,12 +9,9 @@ async function interested(eventData) {
 
     // const eventInterestedCount = document.getElementById('event-interested');
 
-    await fetch(
-        `https://florin-server.onrender.com/events/interested/${fullEventPopup.id}`,
-        {
-            method: "PATCH",
-        }
-    )
+    await fetch(`${apiUrl}events/interested/${fullEventPopup.id}`, {
+        method: "PATCH",
+    })
         .then((response) => response.json())
         .then((data) => {
             fullEventInterestedCount.innerHTML = data.interest;
@@ -34,12 +34,9 @@ async function uninterested(eventData) {
     const fullEventInterestedCount = document.getElementById(
         "full-event-interested"
     );
-    await fetch(
-        `https://florin-server.onrender.com/events/not_interested/${fullEventPopup.id}`,
-        {
-            method: "PATCH",
-        }
-    )
+    await fetch(`${apiUrl}events/not_interested/${fullEventPopup.id}`, {
+        method: "PATCH",
+    })
         .then((response) => response.json())
         .then((data) => {
             fullEventInterestedCount.innerHTML = data.interest;
@@ -62,12 +59,9 @@ async function attending(eventData) {
     const fullEventAttendingCount = document.getElementById(
         "full-event-attending"
     );
-    await fetch(
-        `https://florin-server.onrender.com/events/attend/${fullEventPopup.id}`,
-        {
-            method: "PATCH",
-        }
-    )
+    await fetch(`${apiUrl}events/attend/${fullEventPopup.id}`, {
+        method: "PATCH",
+    })
         .then((response) => response.json())
         .then((data) => {
             fullEventAttendingCount.innerHTML = data.attending;
@@ -89,12 +83,9 @@ async function not_attending(eventData) {
     const fullEventAttendingCount = document.getElementById(
         "full-event-attending"
     );
-    await fetch(
-        `https://florin-server.onrender.com/events/not_attending/${fullEventPopup.id}`,
-        {
-            method: "PATCH",
-        }
-    )
+    await fetch(`${apiUrl}events/not_attending/${fullEventPopup.id}`, {
+        method: "PATCH",
+    })
         .then((response) => response.json())
         .then((data) => {
             fullEventAttendingCount.innerHTML = data.attending;
@@ -136,11 +127,3 @@ function editAttendingCountOnPage(eventId, attendingCount) {
         }
     }
 }
-
-document
-    .getElementById("interested-button")
-    .addEventListener("click", interested);
-
-document
-    .getElementById("attending-button")
-    .addEventListener("click", attending);

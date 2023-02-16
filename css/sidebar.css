@@ -24,7 +24,7 @@
     padding: 7px;
     font-size: 15px;
     border-radius: 20px;
-    color: coral;
+    color: lightcoral;
     text-align: center;
     margin: 10px 0;
 }
@@ -38,7 +38,7 @@
 
 .category-list li:hover {
     background-color: white;
-    color: coral;
+    color: lightcoral;
     cursor: pointer;
 }
 
@@ -55,5 +55,5 @@
 
 .sidebar-selected {
     background-color: white;
-    color: coral;
+    color: lightcoral;
 }

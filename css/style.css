@@ -46,7 +46,7 @@ body::-webkit-scrollbar {
 .button-colours {
     background-color: white;
     width: 100px;
-    color: coral;
+    color: lightcoral;
     padding: 8px;
     font-size: large;
     cursor: pointer;
@@ -73,8 +73,8 @@ body::-webkit-scrollbar {
 }
 .button-colours-reverse:hover {
     background-color: white;
-    color: coral;
-    border: coral solid;
+    color: lightcoral;
+    border: lightcoral solid;
 }
 
 #my-events-button {

@@ -58,7 +58,7 @@ search.addEventListener("keydown", async function searching(event) {
             loadAllEvents();
         }
         const response = await fetch(
-            `https://florin-server.onrender.com/events/search/${search.value}`,
+            `${apiUrl}events/search/${search.value}`,
             options
         );
         if (response.status === 200) {
