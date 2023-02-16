@@ -62,7 +62,7 @@ function createEventElement(data) {
     const clone = element.cloneNode(true);
 
     const date = formatDateWithoutTime(data.start_date, data.end_date);
-    clone.getElementsByClassName("event-id")[0].textContent = data.event_id;
+    clone.getElementsByClassName("event-id")[0].textContent = data.id;
     clone.getElementsByClassName("event-image")[0].src = data.image_url;
     clone.getElementsByClassName("event-date")[0].textContent = date;
     clone.getElementsByClassName("event-title")[0].textContent = data.title;
@@ -82,4 +82,22 @@ function createEventElement(data) {
     clone.addEventListener("click", displayFullEventDetails);
 
     return clone;
+}
+
+async function deleteEvent(eventId) {
+    const options = {
+        headers: {
+            Authorization: localStorage.getItem("token"),
+        },
+    };
+    const response = await fetch(
+        "http://localhost:3000/events/" + eventId,
+        options
+    );
+    if (response.status === 200) {
+        const data = await response.json();
+        data.forEach((item) => {
+            deleteEventFromPage(eventId);
+        });
+    }
 }

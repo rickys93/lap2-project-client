@@ -15,18 +15,8 @@ async function interested(eventData) {
         .then((response) => response.json())
         .then((data) => {
             fullEventInterestedCount.innerHTML = data.interest;
-            const allEvents = getAllEvents();
 
-            for (e of allEvents) {
-                if (
-                    e.getElementsByClassName("event-id")[0].textContent ===
-                    eventData.id
-                ) {
-                    e.getElementsByClassName(
-                        "event-interested"
-                    )[0].textContent = data.interest;
-                }
-            }
+            editInterestCountOnPage(fullEventPopup.id, data.interest);
         })
         .catch((error) => {
             console.error(error);
@@ -53,6 +43,8 @@ async function uninterested(eventData) {
         .then((response) => response.json())
         .then((data) => {
             fullEventInterestedCount.innerHTML = data.interest;
+
+            editInterestCountOnPage(fullEventPopup.id, data.interest);
         })
         .catch((error) => {
             console.error(error);
@@ -76,6 +68,7 @@ async function attending(eventData) {
         .then((response) => response.json())
         .then((data) => {
             fullEventAttendingCount.innerHTML = data.attending;
+            editAttendingCountOnPage(fullEventPopup.id, data.attending);
         })
         .catch((error) => {
             console.error(error);
@@ -102,6 +95,7 @@ async function not_attending(eventData) {
         .then((response) => response.json())
         .then((data) => {
             fullEventAttendingCount.innerHTML = data.attending;
+            editAttendingCountOnPage(fullEventPopup.id, data.attending);
         })
         .catch((error) => {
             console.error(error);
@@ -113,6 +107,31 @@ async function not_attending(eventData) {
     document
         .getElementById("attending-button")
         .removeEventListener("click", not_attending);
+}
+
+function editInterestCountOnPage(eventId, interestCount) {
+    //
+    const allEvents = getAllEvents();
+
+    for (e of allEvents) {
+        const id = e.getElementsByClassName("event-id")[0].textContent;
+        if (id == eventId) {
+            e.getElementsByClassName("event-interested")[0].textContent =
+                interestCount;
+        }
+    }
+}
+
+function editAttendingCountOnPage(eventId, attendingCount) {
+    const allEvents = getAllEvents();
+
+    for (e of allEvents) {
+        const id = e.getElementsByClassName("event-id")[0].textContent;
+        if (id == eventId) {
+            e.getElementsByClassName("event-attending")[0].textContent =
+                attendingCount;
+        }
+    }
 }
 
 document
