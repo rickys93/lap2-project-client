@@ -6,12 +6,27 @@ async function interested(eventData) {
 
     // const eventInterestedCount = document.getElementById('event-interested');
 
-    await fetch(`http://localhost:3000/events/interested/${eventData.id}`, {
-        method: "PATCH",
-    })
+    await fetch(
+        `http://localhost:3000/events/interested/${fullEventPopup.id}`,
+        {
+            method: "PATCH",
+        }
+    )
         .then((response) => response.json())
         .then((data) => {
             fullEventInterestedCount.innerHTML = data.interest;
+            const allEvents = getAllEvents();
+
+            for (e of allEvents) {
+                if (
+                    e.getElementsByClassName("event-id")[0].textContent ===
+                    eventData.id
+                ) {
+                    e.getElementsByClassName(
+                        "event-interested"
+                    )[0].textContent = data.interest;
+                }
+            }
         })
         .catch((error) => {
             console.error(error);
@@ -19,18 +34,22 @@ async function interested(eventData) {
     //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
     document
         .getElementById("interested-button")
-        .addEventListener("click", () => uninterested(eventData), {
-            once: true,
-        });
+        .addEventListener("click", uninterested);
+    document
+        .getElementById("interested-button")
+        .removeEventListener("click", interested);
 }
 
 async function uninterested(eventData) {
     const fullEventInterestedCount = document.getElementById(
         "full-event-interested"
     );
-    await fetch(`http://localhost:3000/events/not_interested/${eventData.id}`, {
-        method: "PATCH",
-    })
+    await fetch(
+        `http://localhost:3000/events/not_interested/${fullEventPopup.id}`,
+        {
+            method: "PATCH",
+        }
+    )
         .then((response) => response.json())
         .then((data) => {
             fullEventInterestedCount.innerHTML = data.interest;
@@ -41,14 +60,17 @@ async function uninterested(eventData) {
     //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
     document
         .getElementById("interested-button")
-        .addEventListener("click", () => interested(eventData), { once: true });
+        .addEventListener("click", interested);
+    document
+        .getElementById("interested-button")
+        .removeEventListener("click", uninterested);
 }
 
 async function attending(eventData) {
     const fullEventAttendingCount = document.getElementById(
         "full-event-attending"
     );
-    await fetch(`http://localhost:3000/events/attend/${eventData.id}`, {
+    await fetch(`http://localhost:3000/events/attend/${fullEventPopup.id}`, {
         method: "PATCH",
     })
         .then((response) => response.json())
@@ -61,18 +83,22 @@ async function attending(eventData) {
     //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
     document
         .getElementById("attending-button")
-        .addEventListener("click", () => not_attending(eventData), {
-            once: true,
-        });
+        .removeEventListener("click", attending);
+    document
+        .getElementById("attending-button")
+        .addEventListener("click", not_attending);
 }
 
 async function not_attending(eventData) {
     const fullEventAttendingCount = document.getElementById(
         "full-event-attending"
     );
-    await fetch(`http://localhost:3000/events/not_attending/${eventData.id}`, {
-        method: "PATCH",
-    })
+    await fetch(
+        `http://localhost:3000/events/not_attending/${fullEventPopup.id}`,
+        {
+            method: "PATCH",
+        }
+    )
         .then((response) => response.json())
         .then((data) => {
             fullEventAttendingCount.innerHTML = data.attending;
@@ -83,5 +109,16 @@ async function not_attending(eventData) {
     //   eventInterestedCount.textContent =  fullEventInterestedCount.innerHTML;
     document
         .getElementById("attending-button")
-        .addEventListener("click", () => attending(eventData), { once: true });
+        .addEventListener("click", attending);
+    document
+        .getElementById("attending-button")
+        .removeEventListener("click", not_attending);
 }
+
+document
+    .getElementById("interested-button")
+    .addEventListener("click", interested);
+
+document
+    .getElementById("attending-button")
+    .addEventListener("click", attending);

@@ -82,10 +82,6 @@ function displayFullEventDetailsInPopup(eventData) {
         eventData.location;
     document.getElementById("full-event-description").textContent =
         eventData.description;
-
-    document
-        .getElementById("interested-button")
-        .addEventListener("click", () => interested(eventData));
 }
 
 // add events listeners for all of the popups
