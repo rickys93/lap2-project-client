@@ -11,15 +11,15 @@
 }
 
 .event-container {
-    flex: 1 0 42%;
+    flex: 1 0 30%;
     background-color: var(--containers);
     min-width: 300px;
-    max-width: 500px;
-    max-height: 350px;
+    max-width: 700px;
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
     display: none;
+    align-self: flex-start;
 }
 .event-container:hover {
     background-color: var(--containers-light);
@@ -28,10 +28,10 @@
 
 .picture-container img {
     border-radius: 10px;
-    width: auto;
-    height: auto;
-    max-height: 100%;
-    max-width: 100%;
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Resize the image to completely cover the container */
+    object-position: center; /* Center the image within the container */
 }
 
 .event-details-container {
@@ -71,4 +71,20 @@
 
 .event-id {
     display: none;
+}
+
+.delete-button {
+    margin-top: 10px;
+    background-color: lightcoral;
+    color: white;
+    border: rgba(255, 255, 255, 0) solid;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.delete-button:hover {
+    background-color: white;
+    color: coral;
+    border: coral solid;
 }

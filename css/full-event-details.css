@@ -94,3 +94,7 @@
 .full-event-details div {
     margin: 5px 0;
 }
+
+.full-event-picture-container img {
+    width: 100%;
+}

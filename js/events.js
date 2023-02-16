@@ -86,6 +86,7 @@ function createEventElement(data) {
 
 async function deleteEvent(eventId) {
     const options = {
+        method: "DELETE",
         headers: {
             Authorization: localStorage.getItem("token"),
         },
@@ -96,8 +97,29 @@ async function deleteEvent(eventId) {
     );
     if (response.status === 200) {
         const data = await response.json();
-        data.forEach((item) => {
-            deleteEventFromPage(eventId);
-        });
+        deleteEventFromPage(data.id);
     }
+}
+
+function deleteEventFromPage(eventId) {
+    const myEvents = getAllMyEvents();
+    for (e of myEvents) {
+        if (eventId == e.getElementsByClassName("event-id")[0].textContent) {
+            e.remove();
+        }
+    }
+    const allEvents = getAllEvents();
+    for (e of allEvents) {
+        if (eventId == e.getElementsByClassName("event-id")[0].textContent) {
+            e.remove();
+        }
+    }
+}
+
+function findEventElement(element) {
+    if (element.classList.contains("event-details-container")) {
+        return element;
+    }
+
+    return findEventElement(element.parentNode);
 }
