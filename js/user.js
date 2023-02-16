@@ -76,11 +76,12 @@ async function submitRegisterForm(e) {
     const data = await response.json();
 
     if (response.status == 201) {
+        displayAlert("register-alert", data.error);
+    } else {
         registerPopup.classList.toggle("popup-visible");
         loginPopup.classList.toggle("popup-visible");
         hideAlert("register-alert");
-    } else {
-        displayAlert("register-alert", data.error);
+        
     }
 }
 
