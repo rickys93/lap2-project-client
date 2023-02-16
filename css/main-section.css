@@ -15,6 +15,7 @@
     background-color: var(--containers);
     min-width: 300px;
     max-width: 500px;
+    max-height: 350px;
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
@@ -26,8 +27,11 @@
 }
 
 .picture-container img {
-    width: 100%;
     border-radius: 10px;
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .event-details-container {
@@ -40,6 +44,7 @@
 .button-container {
     display: flex;
     flex-direction: column;
+    margin: 0 5px;
 }
 
 .button-container span {
@@ -62,4 +67,8 @@
     color: lightcoral;
     font-weight: 600;
     cursor: pointer;
+}
+
+.event-id {
+    display: none;
 }
