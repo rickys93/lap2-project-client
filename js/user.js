@@ -49,6 +49,7 @@ async function submitLogoutForm(e) {
 
     localStorage.clear();
     logOut();
+    window.location.reload();
 }
 
 async function submitRegisterForm(e) {
@@ -77,8 +78,9 @@ async function submitRegisterForm(e) {
     if (response.status == 201) {
         registerPopup.classList.toggle("popup-visible");
         loginPopup.classList.toggle("popup-visible");
+        hideAlert("register-alert");
     } else {
-        alert(data.error);
+        displayAlert("register-alert", data.error);
     }
 }
 
@@ -109,8 +111,24 @@ async function submitLoginForm(e) {
         myEventsButton.classList.toggle("display-none");
         createNewEventButton.classList.toggle("display-none");
         logIn(form.get("username"));
+        window.location.reload();
+        hideAlert("login-alert");
     } else {
-        alert(data.error);
+        displayAlert("login-alert", data.error);
+    }
+}
+
+function hideAlert(id) {
+    if (!document.getElementById(id).classList.contains("visibility-hidden")) {
+        document.getElementById(id).classList.toggle("visibility-hidden");
+    }
+}
+
+function displayAlert(id, error) {
+    document.getElementById(id).textContent = error;
+
+    if (document.getElementById(id).classList.contains("visibility-hidden")) {
+        document.getElementById(id).classList.toggle("visibility-hidden");
     }
 }
 

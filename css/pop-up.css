@@ -73,8 +73,12 @@
     width: 290px;
 }
 
+.login-register-alert {
+    height: 20px;
+    color: rgb(255, 74, 74);
+}
+
 .register-login-button {
-    margin-top: 20px;
     margin-bottom: 10px;
     width: 300px;
 }

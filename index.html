@@ -25,8 +25,9 @@
                 <div class="pop-up-message">
                     <h2>Log In</h2>
                     <form id="login-form">
-                        <input class="username-password" type="text" id="username" name="username" placeholder="Username">
-                        <input class="username-password" type="password" id="password" name="password" placeholder="Password">
+                        <input required class="username-password" type="text" id="username" name="username" placeholder="Username">
+                        <input required class="username-password" type="password" id="password" name="password" placeholder="Password">
+                        <div class="login-register-alert visibility-hidden" id="login-alert"></div>
                         <input type="submit" value="Log in" class="register-login-button button-colours-reverse">
                     </form>
                     <p>No account? <button class="button-colours-reverse" id="register-from-login">Sign up here</button></p>
@@ -41,8 +42,9 @@
                 <div class="pop-up-message" >
                     <h2>Register</h2>
                     <form id="register-form">
-                        <input class="username-password" type="text" id="username" name="username" placeholder="Username">
-                        <input class="username-password" type="password" id="password" name="password" placeholder="Password">
+                        <input required class="username-password" type="text" id="username" name="username" placeholder="Username">
+                        <input required class="username-password" type="password" id="password" name="password" placeholder="Password">
+                        <div class="login-register-alert visibility-hidden" id="register-alert"></div>
                         <input type="submit" value="Register" class="register-login-button button-colours-reverse">
                     </form>
                     <p>Already registered? <button class="button-colours-reverse" id="login-from-register">Log in here</button></p>
