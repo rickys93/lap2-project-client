@@ -8,7 +8,10 @@ async function loadAllEvents() {
         },
     };
 
-    const response = await fetch("http://localhost:3000/events", options);
+    const response = await fetch(
+        "https://florin-server.onrender.com/events",
+        options
+    );
     if (response.status === 200) {
         const data = await response.json();
         data.forEach((item) => {
@@ -22,7 +25,7 @@ async function loadAllEvents() {
     }
 
     const authResponse = await fetch(
-        "http://localhost:3000/users/authorize",
+        "https://florin-server.onrender.com/users/authorize",
         options
     );
     if (authResponse.status === 200) {
@@ -92,7 +95,7 @@ async function deleteEvent(eventId) {
         },
     };
     const response = await fetch(
-        "http://localhost:3000/events/" + eventId,
+        "https://florin-server.onrender.com/events/" + eventId,
         options
     );
     if (response.status === 200) {

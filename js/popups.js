@@ -52,7 +52,9 @@ async function displayFullEventDetails(e) {
     const targetElement = findTargetElement(e.target);
     const eventId = parseInt(targetElement.id);
 
-    const response = await fetch("http://localhost:3000/events/" + eventId);
+    const response = await fetch(
+        "https://florin-server.onrender.com/events/" + eventId
+    );
 
     if (response.status !== 200) {
         return;

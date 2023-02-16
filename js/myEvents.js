@@ -29,7 +29,10 @@ async function getUserEvents(e) {
         },
     };
 
-    const response = await fetch("http://localhost:3000/users/events", options);
+    const response = await fetch(
+        "https://florin-server.onrender.com/users/events",
+        options
+    );
 
     if (response.status === 200) {
         clearAllMyEvents();

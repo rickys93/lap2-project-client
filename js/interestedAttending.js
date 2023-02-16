@@ -7,7 +7,7 @@ async function interested(eventData) {
     // const eventInterestedCount = document.getElementById('event-interested');
 
     await fetch(
-        `http://localhost:3000/events/interested/${fullEventPopup.id}`,
+        `https://florin-server.onrender.com/events/interested/${fullEventPopup.id}`,
         {
             method: "PATCH",
         }
@@ -35,7 +35,7 @@ async function uninterested(eventData) {
         "full-event-interested"
     );
     await fetch(
-        `http://localhost:3000/events/not_interested/${fullEventPopup.id}`,
+        `https://florin-server.onrender.com/events/not_interested/${fullEventPopup.id}`,
         {
             method: "PATCH",
         }
@@ -62,9 +62,12 @@ async function attending(eventData) {
     const fullEventAttendingCount = document.getElementById(
         "full-event-attending"
     );
-    await fetch(`http://localhost:3000/events/attend/${fullEventPopup.id}`, {
-        method: "PATCH",
-    })
+    await fetch(
+        `https://florin-server.onrender.com/events/attend/${fullEventPopup.id}`,
+        {
+            method: "PATCH",
+        }
+    )
         .then((response) => response.json())
         .then((data) => {
             fullEventAttendingCount.innerHTML = data.attending;
@@ -87,7 +90,7 @@ async function not_attending(eventData) {
         "full-event-attending"
     );
     await fetch(
-        `http://localhost:3000/events/not_attending/${fullEventPopup.id}`,
+        `https://florin-server.onrender.com/events/not_attending/${fullEventPopup.id}`,
         {
             method: "PATCH",
         }

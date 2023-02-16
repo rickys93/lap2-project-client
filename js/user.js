@@ -45,7 +45,10 @@ async function submitLogoutForm(e) {
         },
     };
 
-    const response = await fetch("http://localhost:3000/users/logout", options);
+    const response = await fetch(
+        "https://florin-server.onrender.com/users/logout",
+        options
+    );
 
     localStorage.clear();
     logOut();
@@ -70,7 +73,7 @@ async function submitRegisterForm(e) {
     };
 
     const response = await fetch(
-        "http://localhost:3000/users/register",
+        "https://florin-server.onrender.com/users/register",
         options
     );
     const data = await response.json();
@@ -101,7 +104,10 @@ async function submitLoginForm(e) {
         }),
     };
 
-    const response = await fetch("http://localhost:3000/users/login", options);
+    const response = await fetch(
+        "https://florin-server.onrender.com/users/login",
+        options
+    );
     const data = await response.json();
 
     if (response.status == 200) {

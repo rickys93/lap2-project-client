@@ -28,7 +28,7 @@ function submitNewEventForm(event) {
     formData.append("token", token);
     formData.append("location", location);
 
-    fetch("http://localhost:3000/events", {
+    fetch("https://florin-server.onrender.com/events", {
         method: "POST",
         body: formData,
     })
