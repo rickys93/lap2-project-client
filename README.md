@@ -12,7 +12,7 @@ To use the application, make sure that you are connected to your database and cr
 
 ### Usage
 Once the application is installed, users can register as a user, create events, view other people's events, and declare interest in attending events. Users can also view events by category and search for events using the search bar.
-![Application image](https://github.com/rickys93/lap2-project-client/staging/images/app.png)
+![Application image](https://github.com/rickys93/lap2-project-client/blob/staging/images/app.png)
 
 ### Acknowledgements
 This App was built with the cotributions of Mohakim231, rickys93 and kay-dev-uk.
