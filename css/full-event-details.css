@@ -1,0 +1,100 @@
+.event-pop-up {
+    overflow-y: scroll;
+    width: 90vw;
+    height: 80vh;
+    max-width: 900px;
+    max-height: 900px;
+    min-height: 400px;
+}
+
+.event-pop-up::-webkit-scrollbar {
+    margin-right: 20px;
+}
+
+.full-event-container {
+    padding: 20px;
+    box-shadow: 5px 10px #888888;
+}
+.full-event-title-container {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border-bottom: rgb(54, 54, 54) solid 1px;
+    padding-bottom: 5px;
+}
+
+.full-event-date {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.full-event-title {
+    font-size: 30px;
+}
+
+.full-event-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.full-event-button {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    font-weight: 600;
+}
+.full-event-buttons button {
+    padding: 10px;
+    margin: 0 10px;
+    border: none;
+    background-color: rgb(255, 127, 80);
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.full-event-buttons button:hover {
+    cursor: pointer;
+    background-color: rgba(255, 127, 80, 0.8);
+}
+
+.full-event-details-container {
+    background-color: rgb(231, 231, 231);
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+}
+
+.full-event-details {
+    background-color: white;
+    width: 80%;
+
+    box-shadow: 1px 2px #888888;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 20px;
+}
+
+.full-event-details h2 {
+    margin-bottom: 10px;
+    font-size: 35px;
+}
+
+.event-user,
+.event-location {
+    margin: 10px 0;
+}
+
+.full-event-details div {
+    margin: 5px 0;
+}
+
+.full-event-picture-container img {
+    width: 100%;
+}

@@ -1,0 +1,103 @@
+.pop-up {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: rgb(59, 59, 59);
+    z-index: 2;
+    visibility: hidden;
+}
+
+.small-pop-up {
+    width: 70vw;
+    height: 80vh;
+    max-width: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-visible {
+    visibility: visible;
+}
+
+.pop-up-center {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.close-pop-up {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.close-pop-up:hover {
+    color: gray;
+}
+
+.pop-up-message {
+    text-align: center;
+    flex-direction: column;
+}
+
+.small-pop-up .pop-up-message h2 {
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.pop-up-message form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pop-up-message form input {
+    font-size: large;
+}
+
+.username-password {
+    margin: 2px 0;
+    padding: 5px;
+    width: 290px;
+}
+
+.login-register-alert {
+    height: 20px;
+    color: rgb(255, 74, 74);
+}
+
+.register-login-button {
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+.pop-up-message p {
+    font-size: large;
+}
+
+.pop-up-message p button {
+    margin-left: 10px;
+    font-size: large;
+}
+
+.flex-container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.test-box {
+    height: 300px;
+}

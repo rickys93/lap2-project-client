@@ -4,273 +4,319 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./style.css" />
-        <title>Document</title>
+        <link rel="stylesheet" href="./css/style.css" />
+        <script src="./js/helpers.js" defer></script>
+        <script src="./js/createEvent.js" defer></script>
+        <script src="./js/events.js" defer></script>
+        <script src="./js/interestedAttending.js" defer></script>
+        <script src="./js/popups.js" defer></script>
+        <script src="./js/user.js" defer></script>
+        <script src="./js/sidebar.js" defer></script>
+        <script src="./js/myEvents.js" defer></script>
+        <script src="./js/index.js" defer></script>
+        <title>Florin County Council</title>
+        <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/128/9702/9702016.png" type="image/x-icon">
     </head>
     <body>
-        <div class="background-image">
-            <nav class="navigation-bar">
-                <div class="nav-left">
-                    <a class="logo" href="./index.html">Florin</a>
+        <!-- log in pop up window - set to hidden by default -->
+        <div class="full-screen flex-container-center pop-up" id="login-popup">
+            <div class="pop-up-center small-pop-up">
+                <button id="register-close-button" class="close-pop-up">&#215;
+                </button>
+                <div class="pop-up-message">
+                    <h2>Log In</h2>
+                    <form id="login-form">
+                        <input required class="username-password" type="text" id="username" name="username" placeholder="Username">
+                        <input required class="username-password" type="password" id="password" name="password" placeholder="Password">
+                        <div class="login-register-alert visibility-hidden" id="login-alert"></div>
+                        <input type="submit" value="Log in" class="register-login-button button-colours-reverse">
+                    </form>
+                    <p>No account? <button class="button-colours-reverse" id="register-from-login">Sign up here</button></p>
                 </div>
-                <div class="nav-right">
-                    <button class="button-colours" id="log-in-button" href="">
-                        Log In
+            </div>
+        </div>
+        <!-- register pop up window - set to hidden by default -->
+        <div class="full-screen flex-container-center pop-up" id="register-popup">
+            <div class="pop-up-center small-pop-up">
+                <button id="register-close-button" class="close-pop-up">&#215;
+                </button>
+                <div class="pop-up-message" >
+                    <h2>Register</h2>
+                    <form id="register-form">
+                        <input required class="username-password" type="text" id="username" name="username" placeholder="Username">
+                        <input required class="username-password" type="password" id="password" name="password" placeholder="Password">
+                        <div class="login-register-alert visibility-hidden" id="register-alert"></div>
+                        <input type="submit" value="Register" class="register-login-button button-colours-reverse">
+                    </form>
+                    <p>Already registered? <button class="button-colours-reverse" id="login-from-register">Log in here</button></p>
+                </div>
+            </div>
+        </div>
+        <!-- create new event pop up window - set to hidden by default -->
+        <div class="full-screen flex-container-center pop-up" id="create-event-popup">
+            <div class="pop-up-center create-event-pop-up">
+                <button id="register-close-button" class="close-pop-up">&#215;
+                </button>
+                <h2>Create New Event</h2>
+                <div class="pop-up-message" >
+                    <form id="create-event-form">
+                        <div class="textbox form-box">
+                            <input  placeholder="Event name" type="text" id="title" name="event_title" required />
+                        </div>
+                        <div class="textbox form-box">
+                            <input type="text" id="location" name="location" placeholder="Event location">
+                        </div>
+                        <div class="category-form form-box">
+                            <label for="categories">Category</label>
+                            <select name="categories" id="categories">
+                                <option value="festival">Festivals and Fairs</option>
+                                <option value="music">Music and Concerts</option>
+                                <option value="charity">Community and Charity</option>
+                                <option value="education">
+                                    Education and Learning
+                                </option>
+                                <option value="art">Arts and Culture</option>
+                                <option value="family">Family and Kids</option>
+                                <option value="business">
+                                    Business and Networking
+                                </option>
+                            </select>
+                        </div>
+                        <input id="fileInput" type="file" name="myFile" class="form-box" />
+                        <div class="form-box form-dates">
+                                <label for="start_date">Start Date:</label>
+                                <input
+                                type="datetime-local"
+                                id="start_date"
+                                name="start_date"
+                                required
+                            />
+        
+                            <label for="end_date">End Date:</label>
+                            <input
+                                type="datetime-local"
+                                id="end_date"
+                                name="end_date"
+                                required
+                            />
+                        </div>
+                        <div class="form-box form-description">
+                            <label for="title">Description</label>
+                            <textarea
+                                id="content"
+                                name="event_description"
+                                required
+                            ></textarea>
+                        </div>
+
+                            <input class="button-colours-reverse create-event-button" type="submit" value="Create Event" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="full-screen flex-container-center pop-up" id="event-created-popup">
+            <div class="pop-up-center small-pop-up">
+                <button id="register-close-button" class="close-pop-up">&#215;
+                </button>
+                <div class="pop-up-message" >
+                   <h2>Event Created Successfully!</h2>
+                </div>
+            </div>
+        </div>
+        <!-- my events pop up window - set to hidden by default -->
+        <div class="full-screen flex-container-center pop-up" id="my-events-popup">
+            <div class="my-event-pop-up">
+                <button id="register-close-button" class="close-pop-up">&#215;
+                </button>
+                <h2>My Events</h2>
+                
+                <div id="my-events-container">
+                    <div class="event-container", id="dummy-my-event-container">
+                        <div class="picture-container">
+                            <img
+                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
+                                alt=""
+                                class="event-image"
+                            />
+                        </div>
+                        <div class="event-details-container">
+                            <div class="event-id">1                      
+                            </div>
+                            <div>
+                                <span class="event-date"></span>
+                            </div>
+                            <div>
+                                <span class="event-title"></span>
+                            </div>
+                            <div>
+                                <span class="event-location"></span>
+                            </div>
+                            <div>
+                                <span class="event-category"></span>
+                            </div>
+                            <div class="buttons-container">
+                                <div class="button-container">
+                                    <span><span class="event-interested" id="event-interested"></span> &#9734;</span>
+                                </div>
+                                <div class="button-container">
+                                    <span><span class="event-attending"></span> &#10004;</span>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="delete-button">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- full event details pop up window - set to hidden by default -->
+        <div class="full-screen flex-container-center pop-up" id="full-event-popup">
+            <div class="pop-up-center event-pop-up">
+                <button id="register-close-button" class="close-pop-up">&#215;
+                </button>
+                <div class="pop-up-message" >
+                    <div class="full-event-picture-container">
+                        <img id="full-event-picture"
+                            src=""
+                            alt=""
+                        />
+                    </div>
+                    <div class="full-event-container">
+                        <div class="full-event-title-container">
+                            <div class="full-event-date">
+                                <span id="event-date"
+                                    ></span
+                                >
+                            </div>
+                            <h2 class="full-event-title">
+                                <span id="event-title"></span>
+                            </h2>
+                            <div>
+                                <span id="event-location"></span>
+                            </div>
+                        </div>
+                        <div class="full-event-buttons">
+                            <div class="full-event-button">
+                                <span id="full-event-interested"></span> &#9734;
+                                <button id="interested-button" type="submit">
+                                    Interested
+                                </button>
+                            </div>
+                            <div class="full-event-button">
+                                <span id="full-event-attending"></span> &#10004;
+                                <button id="attending-button" type="submit">
+                                    Attending
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="full-event-details-container">
+                        <div class="full-event-details">
+                            <h2>Details</h2>
+                            <h3 class="event-user">
+                                &#128100; Event by
+                                <span id="full-event-username"></span>
+                            </h3>
+                            <h3 class="full-event-location">
+                                &#128204 <span id="full-event-location"></span>
+                            </h3>
+                            <div class="event-description" id="full-event-description">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navigation-bar">
+            <a class="logo" href="./index.html">Florin County Council</a>
+            <div class="nav-right">
+                <button class="button-colours display-none" id="log-in-button" href="">
+                    Log In
+                </button>
+                <button class="button-colours display-none" id="sign-up-button" href="">
+                    Sign Up
+                </button>
+                <div id="display-username-container" class="display-username display-none">Welcome, <span id="display-username"></span>!</div>
+                <button class="button-colours display-none" id="log-out-button" href="">
+                    Log Out
+                </button>
+            </div>
+        </nav>
+        <div class="category-sidebar">
+            <ul class="category-list">
+                <div class="sidebar-button-container">
+                    <input
+                        type="text"
+                        name="search"
+                        id="search"
+                        placeholder="🔎︎ Search..."
+                    />
+                </div>
+                <div class="sidebar-button-container">
+                    <button
+                        id="create-new-event"
+                        class="button-colours-reverse display-none"
+                        type="submit"
+                        >
+                        Create Event &#43;
                     </button>
-                    <button class="button-colours" id="sign-up-button" href="">
-                        Sign Up
+                </div>
+                <div class="sidebar-button-container">
+                    <button
+                        id="my-events-button"
+                        class="button-colours-reverse display-none"
+                        type="submit"
+                        >
+                        My Events
                     </button>
                 </div>
-            </nav>
-            <section class="main-section-container">
-                <div class="category-sidebar">
-                    <ul class="category-list">
-                        <li>All</li>
-                        <li>Personal</li>
-                        <li>Work</li>
-                        <li>Party</li>
-                        <li>Workshop</li>
-                        <li>Charity</li>
-                        <li>Big Event</li>
-                        <li>Small Event</li>
-                        <div class="create-new-event-container">
-                            <button
-                                id="create-new-event"
-                                class="button-colours"
-                                type="submit"
-                            >
-                                Create Event &#43;
-                            </button>
-                        </div>
-                    </ul>
+                <li class="category-list-item" id="category-all">All</li>
+                <li class="category-list-item" id="category-festival">Festivals</li>
+                <li class="category-list-item" id="category-music">Music</li>
+                <li class="category-list-item" id="category-charity">Charity</li>
+                <li class="category-list-item" id="category-education">Education</li>
+                <li class="category-list-item" id="category-art">Arts and Culture</li>
+                <li class="category-list-item" id="category-family">Family</li>
+                <li class="category-list-item" id="category-business">Business</li>
+
+            </ul>
+        </div>
+        <div class="main-section" id="events">
+            <div class="event-container", id="dummy-event-container">
+                <div class="picture-container">
+                    <img
+                        src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
+                        alt=""
+                        class="event-image"
+                    />
                 </div>
-                <div class="main-section">
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
+                <div class="event-details-container">
+                    <div class="event-id">1                      
                     </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
+                    <div>
+                        <span class="event-date"></span>
                     </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
+                    <div>
+                        <span class="event-title"></span>
                     </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
+                    <div>
+                        <span class="event-location"></span>
                     </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
+                    <div>
+                        <span class="event-category"></span>
                     </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
+                    <div class="buttons-container">
+                        <div class="button-container">
+                            <span><span class="event-interested" id="event-interested"></span> &#9734;</span>
                         </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="event-container">
-                        <div class="picture-container">
-                            <img
-                                src="./images/325738924_5831057380305227_7516818067925943191_n.jpg"
-                                alt=""
-                            />
-                        </div>
-                        <div class="event-details-container">
-                            <div>
-                                <span id="event-date">Fri, 7 Jul - 9 Jul</span>
-                            </div>
-                            <div>
-                                <span id="event-title">Kent Country Show</span>
-                            </div>
-                            <div>
-                                <span id="event-location">Barcombe Mills</span>
-                            </div>
-                            <div>
-                                <span id="event-interested">600</span>
-                                interested &#9679;
-                                <span id="event-attending">85</span> attending
-                            </div>
-                            <div class="button-container">
-                                <button id="interested-button" type="submit">
-                                    Interested
-                                </button>
-                                <button id="attending-button" type="submit">
-                                    Attending
-                                </button>
-                            </div>
+                        <div class="button-container">
+                            <span><span class="event-attending"></span> &#10004;</span>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
     </body>
 </html>

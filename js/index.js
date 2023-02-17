@@ -1,0 +1,2 @@
+categoryListSidebar();
+loadAllEvents();
