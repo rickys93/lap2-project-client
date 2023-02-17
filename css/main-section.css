@@ -40,6 +40,15 @@
 .event-details-container {
     padding: 10px;
 }
+.event-details-container div {
+    margin-bottom: 1px;
+}
+
+.event-date,
+.event-title {
+    font-weight: 500;
+    font-size: 18px;
+}
 
 .buttons-container {
     display: flex;
@@ -47,7 +56,8 @@
 .button-container {
     display: flex;
     flex-direction: column;
-    margin: 0 5px;
+    margin: 5px 15px 0 0;
+    font-weight: 500;
 }
 
 .button-container span {
