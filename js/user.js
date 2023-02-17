@@ -76,8 +76,10 @@ async function submitRegisterForm(e) {
         registerPopup.classList.toggle("popup-visible");
         loginPopup.classList.toggle("popup-visible");
         hideAlert("register-alert");
+        displayMessage("login-alert", "Registration successful!");
     } else {
         displayAlert("register-alert", data.error);
+        e.target.reset();
     }
 }
 
@@ -112,6 +114,7 @@ async function submitLoginForm(e) {
         hideAlert("login-alert");
     } else {
         displayAlert("login-alert", data.error);
+        e.target.reset();
     }
 }
 
@@ -121,8 +124,24 @@ function hideAlert(id) {
     }
 }
 
+function hideMessage(id) {
+    if (!document.getElementById(id).classList.contains("visibility-hidden")) {
+        document.getElementById(id).classList.toggle("visibility-hidden");
+    }
+}
+
+function displayMessage(id, message) {
+    document.getElementById(id).textContent = message;
+    document.getElementById(id).style.color = "black";
+
+    if (document.getElementById(id).classList.contains("visibility-hidden")) {
+        document.getElementById(id).classList.toggle("visibility-hidden");
+    }
+}
+
 function displayAlert(id, error) {
     document.getElementById(id).textContent = error;
+    document.getElementById(id).style.color = "red";
 
     if (document.getElementById(id).classList.contains("visibility-hidden")) {
         document.getElementById(id).classList.toggle("visibility-hidden");
